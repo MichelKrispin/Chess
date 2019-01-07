@@ -1,5 +1,8 @@
 # Prerequisites
 *.d
+build.sh
+.DS_Store
+.main.c.swp
 
 # Object files
 *.o
