@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 build.sh
+Makefile
 .DS_Store
 .main.c.swp
 
