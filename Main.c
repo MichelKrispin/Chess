@@ -32,16 +32,20 @@ int main()
     while (isPlaying)
     {
         int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
-        if (!inputCode)
+        // 0 = invalid input
+        if (inputCode == 0)
         {
+            COLOR_RED;
             printf("Invalid input\n");
             continue;
-        } else if (inputCode == 2)
+        } else if (inputCode == 2) // 2 = exitcode
         {
             isPlaying = 0;
-        } else if (inputCode == 2)
+            continue;
+        } else if (inputCode == 3) // 3 = player gives up
         {
-            printf("%s gives up!\n %s wins!\n",
+            COLOR_GREEN;
+            printf("%s gives up!\n%s wins!\n",
                      activePlayer ? "White" : "Black",
                      activePlayer ? "Black" : "White" );
             isPlaying = 0;
