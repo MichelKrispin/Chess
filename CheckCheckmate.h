@@ -1,4 +1,5 @@
-int CheckCheckmate(unsigned int row, unsigned int column, unsigned int field[][8][2])
+// Check whether any King is now in Checkmate
+int CheckCheckmate(unsigned int field[][8][2])
 {
 
 }
