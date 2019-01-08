@@ -6,8 +6,23 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
         switch(field[startrow][startcolumn][0])
         {
             case 1:
+                if(destcolumn == startcolumn)
+                {
+                    if(activePLayer)
+                    {
+                        if((destrow == startrow - 1) || ((startrow == 6) && (destrow == startrow - 2)))
+                            return 1;
+                    } 
+                    else
+                    {
+                        if((destrow == startrow + 1) || ((startrow == 1) && (destrow == startrow + 2)))
+                            return 1;
+                    }
+                }
                 break;
             case 2:
+                if((destrow == startrow) || (destcolumn == startcolumn))
+                    return 1;                
                 break;
             case 3:
                 break;
