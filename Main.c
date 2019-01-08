@@ -29,6 +29,10 @@ int main()
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
 
+    // Draw the field once
+    Draw(field);
+    
+
     while (isPlaying)
     {
         int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
@@ -46,8 +50,8 @@ int main()
         {
             COLOR_GREEN;
             printf("%s gives up!\n%s wins!\n",
-                     activePlayer ? "White" : "Black",
-                     activePlayer ? "Black" : "White" );
+                     (activePlayer == 1 ? "White" : "Black"),
+                     (activePlayer == 1 ? "Black" : "White"));
             isPlaying = 0;
         }
 
@@ -76,7 +80,8 @@ int main()
         // Draw the field
         Draw(field);
 
-        activePlayer = activePlayer ? 1 : 0;
+        // Swap active player
+        activePlayer = (activePlayer == 0 ? 1 : 0);
     }
     return 0;
 }

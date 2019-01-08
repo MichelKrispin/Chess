@@ -3,9 +3,13 @@ void Draw(unsigned int field[8][8][2]){
     // Zeilenschleife
     for(unsigned int rowcount = 0; rowcount < 8; rowcount++)
     {   
+        // Print row numbers
+        COLOR_RESET;
+        printf(" %u ", 7 - rowcount + 1);
+
         // Spaltenschleife
         for(unsigned int columnc = 0; columnc < 8; columnc++)
-        {  
+        { 
             // TODO: Option to change colors 
             if (field[rowcount][columnc][1])
                 COLOR_RESET;
@@ -44,4 +48,11 @@ void Draw(unsigned int field[8][8][2]){
         }
         printf("\n");                                           // Zeilenumbruch
     }
+
+    // Print column numbers
+    COLOR_RESET;
+    printf("   ");
+    for (unsigned int i = 1; i < 9; i++)
+        printf(" %u ", i);
+    printf("\n");
 } 
