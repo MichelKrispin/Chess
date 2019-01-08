@@ -21,41 +21,58 @@ int main()
     // Initialize field array with data
     InitializeField(field);
    
-    unsigned int row;
-    unsigned int column;
+    unsigned int startrow, startcolumn;
+    unsigned int destrow, destcolumn;
 
     // Bool saying whether game is still playing
     char isPlaying = 1;
+    // Bool indicating the active player (White=1, Black=0)
+    char activePlayer = 1;
 
     while (isPlaying)
     {
-        if (!GetInput(&row, &column))
+        int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
+        if (!inputCode)
         {
             printf("Invalid input\n");
             continue;
+        } else if (inputCode == 2)
+        {
+            isPlaying = 0;
+        } else if (inputCode == 2)
+        {
+            printf("%s gives up!\n %s wins!\n",
+                     activePlayer ? "White" : "Black",
+                     activePlayer ? "Black" : "White" );
+            isPlaying = 0;
         }
 
+
         // Check if logic is valid on this move
-        if (!CheckLogic(row, column, field))
+        if (!CheckLogic(startrow, startcolumn,
+                        destrow, destcolumn, field))
         {
             printf("Invalid move\n");
             continue;
         }
         // Check if the move is valid
-        if (!CheckMove(row, column, field))
+        if (!CheckMove(activePlayer, startrow, startcolumn,
+                       destrow, destcolumn, field))
         {
             printf("Can't move this way\n");
             continue;
         }
 
         // If everything is allright move the figure
-        Move(row, column, field);
+        Move(startrow, startcolumn, destrow, destcolumn, field);
 
         // Check if check or checkmate
-        CheckCheckmate(row, column, field);
+        CheckCheckmate(field);
 
         // Draw the field
         Draw(field);
+
+        activePlayer = activePlayer ? 1 : 0;
     }
     return 0;
 }
