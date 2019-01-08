@@ -27,7 +27,11 @@ and then the destination position as row and column\n");
      || *startrow    == 0 || *destrow    == 0 
      || *startcolumn == 0 || *destcolumn == 0)
         return 0;
-       
+
+    // Destination can't be the same as the starting position   
+    if (*startrow    == *destrow
+     && *startcolumn == *destcolumn)
+        return 0;
 
     // Manipulate columns to be chess correct
     // And start counting at 0
