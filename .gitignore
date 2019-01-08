@@ -3,7 +3,9 @@
 build.sh
 Makefile
 .DS_Store
-.main.c.swp
+*~
+*.swp
+*.swo
 
 # Object files
 *.o
