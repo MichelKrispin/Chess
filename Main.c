@@ -8,8 +8,9 @@
 
 int main()
 {
-    unsigned int field[8][8][2];                          // Array Initialisieren
-    memset(field, 0, sizeof(field)); // Set all elements to 0
+    // Initialize array to 0
+    unsigned int field[8][8][2];                          
+    memset(field, 0, sizeof(field)); 
 
     // Initialize field array with data
     InitializeField(field);
