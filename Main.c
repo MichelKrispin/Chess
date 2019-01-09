@@ -29,45 +29,35 @@ int main()
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
 
-    // Draw the field once
-    Draw(field);
-    
-
     while (isPlaying)
     {
         int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
-        // 0 = invalid input
-        if (inputCode == 0)
+        if (!inputCode)
         {
-            COLOR_RED;
             printf("Invalid input\n");
             continue;
-        } else if (inputCode == 2) // 2 = exitcode
+        } else if (inputCode == 2)
         {
             isPlaying = 0;
-            continue;
-        } else if (inputCode == 3) // 3 = player gives up
+        } else if (inputCode == 2)
         {
-            COLOR_GREEN;
-            printf("%s gives up!\n%s wins!\n",
-                     (activePlayer == 1 ? "White" : "Black"),
-                     (activePlayer == 1 ? "Black" : "White"));
+            printf("%s gives up!\n %s wins!\n",
+                     activePlayer ? "White" : "Black",
+                     activePlayer ? "Black" : "White" );
             isPlaying = 0;
         }
 
 
-        // Check if logic is valid on this move
-        if (!CheckLogic(startrow, startcolumn,
-                        destrow, destcolumn, field))
-        {
-            printf("Invalid move\n");
-            continue;
-        }
         // Check if the move is valid
-        if (!CheckMove(activePlayer, startrow, startcolumn,
-                       destrow, destcolumn, field))
+        if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
         {
             printf("Can't move this way\n");
+            continue;
+        }
+        // Check if logic is valid on this move
+        if (!CheckLogic(startrow, startcolumn, destrow, destcolumn, field))
+        {
+            printf("Invalid move\n");
             continue;
         }
 
@@ -80,8 +70,7 @@ int main()
         // Draw the field
         Draw(field);
 
-        // Swap active player
-        activePlayer = (activePlayer == 0 ? 1 : 0);
+        activePlayer = activePlayer ? 1 : 0;
     }
     return 0;
 }

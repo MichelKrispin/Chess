@@ -4,7 +4,8 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
     if(field[startrow][startcolumn][1] == (unsigned int) activePLayer)
     {
         switch(field[startrow][startcolumn][0])
-        {
+        {  
+            // Pawn
             case 1:
                 if(destcolumn == startcolumn)
                 {
@@ -20,21 +21,29 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                     }
                 }
                 break;
+            // Tower
             case 2:
                 if((destrow == startrow) || (destcolumn == startcolumn))
                     return 1;                
                 break;
+            // Knight
             case 3:
-                //if(())
+                // if(((destrow - startrow == 1) || (startrow - destrow == 1)) && (() || ()))
                 break;
+            // Bishop
             case 4:
                 if(destrow - startrow == destcolumn - startcolumn)
                     return 1;
                 break;
+            // Queen
             case 5:
+                if((destrow == startrow) || (destcolumn == startcolumn) || (destrow - startrow == destcolumn - startcolumn))
+                    return 1;
                 break;
+            // King
             case 6:
-                if((destrow - startrow == 1))
+                if(((destrow - startrow < 2) || (startrow - destrow < 2)) && ((destcolumn - startcolumn < 2) || (startcolumn - destcolumn < 2)))
+                    return 1;
                 break;
         }
     }
