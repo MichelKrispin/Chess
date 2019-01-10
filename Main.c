@@ -73,7 +73,7 @@ int main()
         // Draw the field
         Draw(field);
 
-        activePlayer = activePlayer ? 1 : 0;
+        activePlayer = activePlayer ? 0 : 1;
     }
     return 0;
 }

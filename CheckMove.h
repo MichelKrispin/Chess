@@ -21,7 +21,7 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                     }
                 }
                 break;
-            // Tower
+            // Rook
             case 2:
                 if((destrow == startrow) || (destcolumn == startcolumn))
                     return 1;                
@@ -45,6 +45,9 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
             case 6:
                 if(((destrow - startrow < 2) || (startrow - destrow < 2)) && ((destcolumn - startcolumn < 2) || (startcolumn - destcolumn < 2)))
                     return 1;
+                break;
+            default: 
+                return 0;
                 break;
         }
     }

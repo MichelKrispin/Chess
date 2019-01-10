@@ -12,6 +12,7 @@
 #define COLOR_WHITE  printf("\x1b[37m")
 
 #define BG_BLACK     printf("\x1b[40m")
+#define BG_RED       printf("\x1b[41m")
 #define BG_WHITE     printf("\x1b[47m")
 
 #endif // CONSOLECOLORS_H

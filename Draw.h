@@ -17,7 +17,7 @@ void Draw(unsigned int field[8][8][2]){
                 COLOR_BLUE;
             
             if((rowcount + columnc) % 2 == 0)                   // Hintergrund (s/w)
-                BG_WHITE;            
+                BG_RED;            
             else
                 BG_BLACK;
             
@@ -27,7 +27,7 @@ void Draw(unsigned int field[8][8][2]){
                     printf(" P ");
                     break;
                 case 2: 
-                    printf(" T ");
+                    printf(" R ");
                     break;
                 case 3: 
                     printf(" N ");
@@ -44,6 +44,7 @@ void Draw(unsigned int field[8][8][2]){
 
                 default: 
                     printf("   ");
+                    break;
             }
         }
         printf("\n");                                           // Zeilenumbruch
