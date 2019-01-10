@@ -2,6 +2,7 @@
 
 typedef struct Window
 {
+    SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Surface* chessField;
     SDL_Texture* background;
@@ -16,7 +17,7 @@ int InitializeSDL(
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
     
     // Create an application window with the following settings:
-    SDL_Window* window = SDL_CreateWindow(
+    sdlWindow->window = SDL_CreateWindow(
                                           "Chess",                 // window title
                                           SDL_WINDOWPOS_UNDEFINED,           // initial x position
                                           SDL_WINDOWPOS_UNDEFINED,           // initial y position
@@ -26,14 +27,15 @@ int InitializeSDL(
                                           );
     
     // Check that the window was successfully created
-    if (window == NULL) {
+    if (sdlWindow->window == NULL)
+    {
         // In the case that the window could not be made...
         printf("Could not create window: %s\n", SDL_GetError());
         return 1;
     }
     
     // Create a renderer, surface and texture
-    sdlWindow->renderer = SDL_CreateRenderer(window, -1, 0);
+    sdlWindow->renderer = SDL_CreateRenderer(sdlWindow->window, -1, 0);
     
     sdlWindow->chessField = SDL_LoadBMP("media/ChessField.bmp");
     sdlWindow->background = SDL_CreateTextureFromSurface(sdlWindow->renderer, sdlWindow->chessField);
@@ -74,7 +76,7 @@ int RenderOnScreen(Window* sdlWindow, Figure *figures)
     
     SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, NULL);
     
-    RenderFigures(12, figures, sdlWindow->renderer);
+    //RenderFigures(12, figures, sdlWindow->renderer);
     SDL_RenderPresent(sdlWindow->renderer);
     
     SDL_Delay(16);
@@ -84,7 +86,6 @@ int RenderOnScreen(Window* sdlWindow, Figure *figures)
 
 void CleanupSDL(
         Window* sdlWindow,
-        SDL_Window* window,
         Figure* figures,
         int count)
 {
@@ -97,7 +98,7 @@ void CleanupSDL(
     SDL_DestroyTexture(sdlWindow->background);
     SDL_FreeSurface(sdlWindow->chessField);
     SDL_DestroyRenderer(sdlWindow->renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyWindow(sdlWindow->window);
     
     // Clean up
     SDL_Quit();

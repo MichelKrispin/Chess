@@ -23,6 +23,11 @@ int main()
 
     // Initialize field array with data
     InitializeField(field);
+
+    // Initialize SDL
+    Window window;
+    Figure figures[32];
+    InitializeSDL(&window, figures, 36);
    
     unsigned int startrow, startcolumn;
     unsigned int destrow, destcolumn;
@@ -32,12 +37,11 @@ int main()
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
 
-    // Draw field
-    Draw(field);
+
 
     while (isPlaying)
     {
-        int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
+        int inputCode = 1;// GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
         if (!inputCode)
         {
             printf("Invalid input\n");
@@ -74,9 +78,11 @@ int main()
         CheckCheckmate(field);
 
         // Draw the field
-        Draw(field);
+        isPlaying = RenderOnScreen(&window, figures);
 
         activePlayer = activePlayer ? 1 : 0;
     }
+
+    CleanupSDL(&window, figures, 32);
     return 0;
 }
