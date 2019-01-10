@@ -11,12 +11,12 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                 {
                     if(activePLayer)
                     {
-                        if((destrow == startrow - 1) || ((startrow == 6) && (destrow == startrow - 2)))
+                        if((destrow == startrow - 1) || ((startrow == 6) && (destrow == 4)))
                             return 1;
                     } 
                     else
                     {
-                        if((destrow == startrow + 1) || ((startrow == 1) && (destrow == startrow + 2)))
+                        if((destrow == startrow + 1) || ((startrow == 1) && (destrow == 3)))
                             return 1;
                     }
                 }
@@ -28,7 +28,8 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                 break;
             // Knight
             case 3:
-                // if(((destrow - startrow == 1) || (startrow - destrow == 1)) && (() || ()))
+                if((((destrow - startrow == 1) || (startrow - destrow == 1)) && ((destcolumn - startcolumn == 2) || (startcolumn - destcolumn == 2))) || (((destcolumn - startcolumn == 1) || (startcolumn - destcolumn == 1)) && ((destrow - startrow == 2) || (startrow - destrow == 2))))
+                    return 1;
                 break;
             // Bishop
             case 4:

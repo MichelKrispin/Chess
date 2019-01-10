@@ -29,6 +29,9 @@ int main()
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
 
+    // Draw field
+    Draw(field);
+
     while (isPlaying)
     {
         int inputCode = GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
