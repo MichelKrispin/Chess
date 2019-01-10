@@ -11,6 +11,9 @@
 #include "Move.h"
 #include "CheckCheckmate.h"
 #include "GetInput.h"
+#include "Figures.h"
+#include "InitializeSDL.h"
+
 
 int main()
 {
