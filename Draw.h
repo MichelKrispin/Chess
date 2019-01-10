@@ -47,11 +47,11 @@ void Draw(unsigned int field[8][8][2]){
                     break;
             }
         }
+        COLOR_RESET;
         printf("\n");                                           // Zeilenumbruch
     }
 
     // Print column numbers
-    COLOR_RESET;
     printf("   ");
     for (unsigned int i = 1; i < 9; i++)
         printf(" %u ", i);

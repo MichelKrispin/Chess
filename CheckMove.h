@@ -19,6 +19,16 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                         if((destrow == startrow + 1) || ((startrow == 1) && (destrow == 3)))
                             return 1;
                     }
+                } 
+                else if(field[destrow][destcolumn][0] && field[destrow][destcolumn][1] != activePLayer)
+                {
+                    if((destcolumn - startcolumn == 1) || (startcolumn - destcolumn == 1))
+                    {
+                        if(activePLayer && (destrow == startrow - 1))
+                            return 1;
+                        else if(!activePLayer && (destrow == startrow + 1))
+                            return 1;
+                    }
                 }
                 break;
             // Rook
@@ -51,4 +61,5 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                 break;
         }
     }
+    return 0;
 }
