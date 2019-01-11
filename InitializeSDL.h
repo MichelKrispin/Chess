@@ -38,9 +38,10 @@ int InitializeSDL(
     sdlWindow->renderer = SDL_CreateRenderer(sdlWindow->window, -1, 0);
     
     sdlWindow->chessField = SDL_LoadBMP("media/ChessField.bmp");
-    sdlWindow->background = SDL_CreateTextureFromSurface(sdlWindow->renderer, sdlWindow->chessField);
+    sdlWindow->background = SDL_CreateTextureFromSurface(
+            sdlWindow->renderer, sdlWindow->chessField);
     
-    
+    /*
     // Initialize figures
     figures[0] = CreateFigureAt("media/W_Pawn.bmp", 10, 10, sdlWindow->renderer);
     figures[1] = CreateFigureAt("media/W_Tower.bmp", 45, 10, sdlWindow->renderer);
@@ -54,6 +55,7 @@ int InitializeSDL(
     figures[9] = CreateFigureAt("media/B_Bishop.bmp", 115, 50, sdlWindow->renderer);
     figures[10] = CreateFigureAt("media/B_Queen.bmp", 150, 50, sdlWindow->renderer);
     figures[11] = CreateFigureAt("media/B_King.bmp", 185, 50, sdlWindow->renderer);
+    */
 
     count = 0;
 

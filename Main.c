@@ -29,8 +29,8 @@ int main()
     Figure figures[32];
     InitializeSDL(&window, figures, 36);
    
-    unsigned int startrow, startcolumn;
-    unsigned int destrow, destcolumn;
+    unsigned int startrow = 0, startcolumn = 0;
+    unsigned int destrow = 0, destcolumn = 0;
 
     // Bool saying whether game is still playing
     char isPlaying = 1;
@@ -41,6 +41,8 @@ int main()
 
     while (isPlaying)
     {
+        /*
+        // Input is not taken at this moment
         int inputCode = 1;// GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
         if (!inputCode)
         {
@@ -77,8 +79,14 @@ int main()
         // Check if check or checkmate
         CheckCheckmate(field);
 
+        */
+
         // Draw the field
         isPlaying = RenderOnScreen(&window, figures);
+        
+        
+        // Prints Error for debug purposes
+        //printf("%s\n", SDL_GetError());
 
         activePlayer = activePlayer ? 1 : 0;
     }
