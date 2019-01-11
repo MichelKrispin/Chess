@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 
+#include "StructDefinitions.h"
 #include "ConsoleColors.h"
 #include "Draw.h"
 #include "Initialize.h"
@@ -26,11 +27,12 @@ int main()
 
     // Initialize SDL
     Window window;
-    Figure figures[32];
-    InitializeSDL(&window, figures, 36);
+    InitializeSDL(&window);
    
-    unsigned int startrow = 0, startcolumn = 0;
-    unsigned int destrow = 0, destcolumn = 0;
+    Figure figures[32];
+    InitializeFigures(figures, &window);
+    //unsigned int startrow = 0, startcolumn = 0;
+    //unsigned int destrow = 0, destcolumn = 0;
 
     // Bool saying whether game is still playing
     char isPlaying = 1;
@@ -82,12 +84,13 @@ int main()
         */
 
         // Draw the field
-        isPlaying = RenderOnScreen(&window, figures);
+        isPlaying = Draw(field, &window, figures);
         
         
         // Prints Error for debug purposes
         //printf("%s\n", SDL_GetError());
 
+        // Toggle active player
         activePlayer = activePlayer ? 1 : 0;
     }
 

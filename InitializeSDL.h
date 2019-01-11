@@ -1,8 +1,6 @@
 #include "SDL2/SDL.h"
 
-int InitializeSDL(
-        Window* sdlWindow,
-        Figure* figures, int count)
+int InitializeSDL(Window* sdlWindow)
 {
     
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
@@ -35,9 +33,14 @@ int InitializeSDL(
     return 0;
 }
 
+
 int RenderOnScreen(Window* sdlWindow, Figure *figures)
 {
-   return 1;
+    SDL_Window* a;
+    a = sdlWindow->window;
+    char b;
+    b = figures[0].isSet;
+    return 1;
 }
 
 
