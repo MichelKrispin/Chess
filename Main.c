@@ -2,6 +2,7 @@
 #include <wchar.h>
 #include <locale.h>
 #include <string.h>
+#include <math.h>
 
 #include "ConsoleColors.h"
 #include "Draw.h"

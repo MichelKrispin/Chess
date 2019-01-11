@@ -2,6 +2,7 @@
 *.d
 *.vscode
 build.sh
+tests.c
 Makefile
 .DS_Store
 *~

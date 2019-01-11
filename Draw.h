@@ -14,7 +14,7 @@ void Draw(unsigned int field[8][8][2]){
             if (field[rowcount][columnc][1])
                 COLOR_RESET;
             else
-                COLOR_BLUE;
+                COLOR_CYAN;
             
             if((rowcount + columnc) % 2 == 0)                   // Hintergrund (s/w)
                 BG_RED;            

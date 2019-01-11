@@ -38,24 +38,25 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                 break;
             // Knight
             case 3:
-                if((((destrow - startrow == 1) || (startrow - destrow == 1)) && ((destcolumn - startcolumn == 2) || (startcolumn - destcolumn == 2))) || (((destcolumn - startcolumn == 1) || (startcolumn - destcolumn == 1)) && ((destrow - startrow == 2) || (startrow - destrow == 2))))
+                if(((abs((int)destrow - (int)startrow) == 1) && (abs((int)destcolumn - (int)startcolumn) == 2)) || ((abs((int)destcolumn - (int)startcolumn) == 1) && (abs((int)destrow - (int)startrow) == 2)))
                     return 1;
                 break;
-            // Bishop
+            // Bishops
             case 4:
-                if(destrow - startrow == destcolumn - startcolumn)
+                if(abs((int)destrow - (int)startrow) == abs((int)destcolumn - (int)startcolumn))
                     return 1;
                 break;
             // Queen
             case 5:
-                if((destrow == startrow) || (destcolumn == startcolumn) || (destrow - startrow == destcolumn - startcolumn))
+                if((destrow == startrow) || (destcolumn == startcolumn) || abs((int)destrow - (int)startrow) == abs((int)destcolumn - (int)startcolumn))
                     return 1;
                 break;
             // King
             case 6:
-                if(((destrow - startrow < 2) || (startrow - destrow < 2)) && ((destcolumn - startcolumn < 2) || (startcolumn - destcolumn < 2)))
+                if((abs((int)destrow - (int)startrow) < 2) && (abs((int)destcolumn - (int)startcolumn) < 2))
                     return 1;
                 break;
+            // no selected
             default: 
                 return 0;
                 break;
