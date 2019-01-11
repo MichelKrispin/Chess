@@ -1,13 +1,13 @@
 void Draw(unsigned int field[8][8][2]){
 
-    // Zeilenschleife
+    // row loop
     for(unsigned int rowcount = 0; rowcount < 8; rowcount++)
     {   
         // Print row numbers
         COLOR_RESET;
         printf(" %u ", 7 - rowcount + 1);
 
-        // Spaltenschleife
+        // column loop
         for(unsigned int columnc = 0; columnc < 8; columnc++)
         { 
             // TODO: Option to change colors 
@@ -16,13 +16,13 @@ void Draw(unsigned int field[8][8][2]){
             else
                 COLOR_CYAN;
             
-            if((rowcount + columnc) % 2 == 0)                   // Hintergrund (s/w)
+            if((rowcount + columnc) % 2 == 0)                   // Background (b/w)
                 BG_RED;            
             else
                 BG_BLACK;
             
             switch(field[rowcount][columnc][0])
-            {                // Figuren (Buchst.)
+            {                // pieces (letters)
                 case 1: 
                     printf(" P ");
                     break;
@@ -48,7 +48,7 @@ void Draw(unsigned int field[8][8][2]){
             }
         }
         COLOR_RESET;
-        printf("\n");                                           // Zeilenumbruch
+        printf("\n");
     }
 
     // Print column numbers

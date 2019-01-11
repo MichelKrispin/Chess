@@ -47,7 +47,7 @@ int Bishop(unsigned int startrow, unsigned int startcolumn,
     return 1;
 }
 
-// checks if there is a piece in the way of the players move
+// checks for a piece in the way of the players move
 int CheckBlocked(char activePlayer, 
                  unsigned int startrow, unsigned int startcolumn, 
                  unsigned int destrow, unsigned int destcolumn, 

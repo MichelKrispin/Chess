@@ -10,7 +10,7 @@
 #include "CheckMove.h"
 #include "CheckLogic.h"
 #include "Move.h"
-#include "CheckCheckmate.h"
+#include "CheckChecked.h"
 #include "GetInput.h"
 
 int main()
@@ -69,7 +69,13 @@ int main()
         Move(startrow, startcolumn, destrow, destcolumn, field);
 
         // Check if check or checkmate
-        CheckCheckmate(field);
+        if(CheckChecked(field))
+        {
+            if(CheckCheckmate(field))
+            {
+                isPlaying = 0;
+            }
+        }
 
         // Draw the field
         Draw(field);
