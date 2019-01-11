@@ -1,13 +1,76 @@
 void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
                                 int* xPixel, int* yPixel)
 {
+    /* TODO: Calculate simple
     // Calculate row to y data
     row += 1;
-    *yPixel = row * 40 + 30;
+    *yPixel = row * 40;
    
     // Calculate column to x data
     column += 1;
-    *xPixel = column * 40 + 30;
+    *xPixel = column * 40 + 20;
+    */
+
+    row += 1;
+    switch (row)
+    {
+        case 1:
+              *yPixel = 45; 
+            break;
+        case 2:
+              *yPixel = 115; 
+            break;
+        case 3:
+              *yPixel = 185; 
+            break;
+        case 4:
+              *yPixel = 250; 
+            break;
+        case 5:
+              *yPixel = 320; 
+            break;
+        case 6:
+              *yPixel = 385; 
+            break;
+        case 7:
+              *yPixel = 450; 
+            break;
+        case 8:
+              *yPixel = 520; 
+            break;
+
+    }
+
+    column += 1;
+    switch (column)
+    {
+        case 1:
+              *xPixel = 50; 
+            break;
+        case 2:
+              *xPixel = 115; 
+            break;
+        case 3:
+              *xPixel = 185; 
+            break;
+        case 4:
+              *xPixel = 250; 
+            break;
+        case 5:
+              *xPixel = 320; 
+            break;
+        case 6:
+              *xPixel = 390; 
+            break;
+        case 7:
+              *xPixel = 455; 
+            break;
+        case 8:
+              *xPixel = 525; 
+            break;
+
+    }
+
 
 }
 
@@ -35,7 +98,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
     {
         figures[i].isSet = 0;
     }
-    
+   
     
     // Zeilenschleife
     for(unsigned int rowcount = 0; rowcount < 8; rowcount++)
@@ -68,6 +131,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                             {
                                 SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
                                 figures[i].isSet = 1;
+                                break;
                             }
                         }
                         break;
@@ -86,6 +150,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                             {
                                 SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
                                 figures[i].isSet = 1;
+                                break;
                             }
                         }
                         break;
@@ -104,6 +169,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                             {
                                 SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
                                 figures[i].isSet = 1;
+                                break;
                             }
                         }
                         break;
@@ -122,6 +188,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                             {
                                 SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
                                 figures[i].isSet = 1;
+                                break;
                             }
                         }
                         break;
@@ -138,6 +205,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                         {
                             SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
                             figures[player].isSet = 1;
+                            break;
                         }
                         break;
                      }                   
@@ -153,6 +221,7 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
                         {
                             SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
                             figures[player].isSet = 1;
+                            break;
                         }
                         break;
                      }                   
@@ -168,8 +237,5 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
      
     SDL_RenderPresent(sdlWindow->renderer);
     
-    SDL_Delay(16);
- 
-
     return 1;
 } 
