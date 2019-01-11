@@ -70,13 +70,55 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
             break;
 
     }
-
-
 }
 
 
+void TransformPixelToRowColumn(
+        int  pixelInputX,
+        unsigned int* rowOutput,
+        int  pixelInputY,
+        unsigned int* columnOutput)
+{
+    if (pixelInputY < 45)
+        *columnOutput = 1;
+    else if (pixelInputY < 115)
+        *columnOutput = 2;
+    else if (pixelInputY < 185)
+        *columnOutput = 3;
+    else if (pixelInputY < 250)
+        *columnOutput = 4;
+    else if (pixelInputY < 320)
+        *columnOutput = 5;
+    else if (pixelInputY < 385)
+        *columnOutput = 6;
+    else if (pixelInputY < 450)
+        *columnOutput = 7;
+    else if (pixelInputY < 520)
+        *columnOutput = 8;
+    
+    if (pixelInputX < 50)
+        *rowOutput = 1;
+    else if (pixelInputX < 115)
+        *rowOutput = 2;
+    else if (pixelInputX < 185)
+        *rowOutput = 3;
+    else if (pixelInputX < 245)
+        *rowOutput = 4;
+    else if (pixelInputX < 320)
+        *rowOutput = 5;
+    else if (pixelInputX < 390)
+        *rowOutput = 6;
+    else if (pixelInputX < 455)
+        *rowOutput = 7;
+    else if (pixelInputX < 525)
+        *rowOutput = 8;
 
-int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
+}
+
+int Draw(unsigned int field[8][8][2],
+         Window* sdlWindow,
+         Figure* figures,
+         MousePosition* mouse)
 {
     SDL_Event event;
 
@@ -86,7 +128,11 @@ int Draw(unsigned int field[8][8][2], Window* sdlWindow, Figure* figures)
     switch(event.type)
     {
         case SDL_QUIT:
-        return 0;
+            return 0;
+        break;
+        case SDL_MOUSEBUTTONDOWN:
+            mouse->newMouseX = event.motion.x;
+            mouse->newMouseY = event.motion.y;
         break;
     }
 

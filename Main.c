@@ -28,7 +28,10 @@ int main()
     // Initialize SDL
     Window window;
     InitializeSDL(&window);
-   
+
+    // For the MousePosition
+    MousePosition mouse = {0, 0, 0, 0};
+  
     Figure figures[32];
     InitializeFigures(figures, &window);
 
@@ -42,7 +45,7 @@ int main()
     char activePlayer = 1;
 
     
-    Draw(field, &window, figures);
+    Draw(field, &window, figures, &mouse);
 
     while (isPlaying)
     {
@@ -78,6 +81,30 @@ int main()
             continue;
         }
 
+        // TODO: DOESN'T WORK RIGHT NOW
+        // Changes it every time 
+        // Check if last mouse is different from new mouse
+        // If so transform to row and column space
+        if (mouse.lastMouseX != mouse.newMouseX
+         || mouse.lastMouseY != mouse.newMouseY)
+        {
+            TransformPixelToRowColumn(
+                    mouse.lastMouseX,
+                    &startrow,
+                    mouse.lastMouseY,
+                    &startcolumn);
+
+            TransformPixelToRowColumn(
+                    mouse.newMouseX,
+                    &destrow,
+                    mouse.newMouseY,
+                    &destcolumn);
+            mouse.lastMouseX = mouse.newMouseX;
+            mouse.lastMouseY = mouse.newMouseY;
+        }
+        //printf("startrow: %u, startcol: %u\ndestrow: %u, destcol: %u",
+        //        startrow, startcolumn, destrow, destcolumn);
+        
         // If everything is allright move the figure
         Move(startrow, startcolumn, destrow, destcolumn, field);
 
@@ -87,7 +114,7 @@ int main()
        
 
         // Draw the field
-        isPlaying = Draw(field, &window, figures);
+        isPlaying = Draw(field, &window, figures, &mouse);
         
         
         // Prints Error for debug purposes

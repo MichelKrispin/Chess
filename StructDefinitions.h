@@ -18,4 +18,10 @@ typedef struct Figure
     char isSet;
 } Figure;
 
-
+typedef struct MousePosition
+{
+    int lastMouseX;
+    int lastMouseY;
+    int newMouseX;
+    int newMouseY;
+} MousePosition;
