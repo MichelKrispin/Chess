@@ -59,7 +59,7 @@ int main()
             continue;
         }
         // Check if logic is valid on this move
-        if (!CheckLogic(startrow, startcolumn, destrow, destcolumn, field))
+        if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
         {
             printf("Invalid move\n");
             continue;
