@@ -54,7 +54,7 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
               *xPixel = 185; 
             break;
         case 4:
-              *xPixel = 250; 
+              *xPixel = 245; 
             break;
         case 5:
               *xPixel = 320; 

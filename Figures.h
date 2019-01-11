@@ -51,7 +51,7 @@ void InitializeFigures(Figure* figures, Window* sdlWindow)
     figures[15] = CreateFigureAt("wk", "media/W_King.bmp", sdlWindow->renderer);
 
     // Initialize black pawns
-    for (int i = 16; i < 23; i++)
+    for (int i = 16; i < 24; i++)
         figures[i] = CreateFigureAt("bp", "media/B_Pawn.bmp", sdlWindow->renderer);
 
     // Initialize black tower

@@ -31,21 +31,24 @@ int main()
    
     Figure figures[32];
     InitializeFigures(figures, &window);
-    //unsigned int startrow = 0, startcolumn = 0;
-    //unsigned int destrow = 0, destcolumn = 0;
+
+    // Intial rows and columns
+    unsigned int startrow = 0, startcolumn = 0;
+    unsigned int destrow = 0, destcolumn = 0;
 
     // Bool saying whether game is still playing
     char isPlaying = 1;
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
 
-
+    
+    Draw(field, &window, figures);
 
     while (isPlaying)
     {
-        /*
+        
         // Input is not taken at this moment
-        int inputCode = 1;// GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
+        int inputCode = 1; //GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
         if (!inputCode)
         {
             printf("Invalid input\n");
@@ -81,7 +84,7 @@ int main()
         // Check if check or checkmate
         CheckCheckmate(field);
 
-        */
+       
 
         // Draw the field
         isPlaying = Draw(field, &window, figures);
