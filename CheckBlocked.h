@@ -1,5 +1,7 @@
 // used for rook and queen
-int Rook(unsigned int startrow, unsigned int startcolumn, unsigned int destrow, unsigned int destcolumn, unsigned int field[][8][2])
+int Rook(unsigned int startrow, unsigned int startcolumn, 
+         unsigned int destrow, unsigned int destcolumn, 
+         unsigned int field[][8][2])
 {
     // row and column addition variable added every loop
     int rookadd = (destrow < startrow) || (destcolumn < startcolumn) ? -1 : 1;
@@ -8,7 +10,7 @@ int Rook(unsigned int startrow, unsigned int startcolumn, unsigned int destrow, 
     if (destrow == startrow)
     {
         // checking every field in column
-        for (rookcount; (int)rookcount < abs((int)destcolumn - (int)startcolumn); rookcount++)
+        for (; (int)rookcount < abs((int)destcolumn - (int)startcolumn); rookcount++)
         {
             if (field[destrow][startcolumn + rookcount * rookadd][0])
                 return 0;
@@ -18,7 +20,7 @@ int Rook(unsigned int startrow, unsigned int startcolumn, unsigned int destrow, 
     else
     {
         // every field in row
-        for (rookcount; (int)rookcount < abs((int)destrow - (int)startrow); rookcount++)
+        for (; (int)rookcount < abs((int)destrow - (int)startrow); rookcount++)
         {
             if (field[startrow + rookcount * rookadd][destcolumn][0])
                 return 0;
@@ -28,7 +30,9 @@ int Rook(unsigned int startrow, unsigned int startcolumn, unsigned int destrow, 
 }
 
 // used for bishop and queen
-int Bishop(unsigned int startrow, unsigned int startcolumn, unsigned int destrow, unsigned int destcolumn, unsigned int field[][8][2])
+int Bishop(unsigned int startrow, unsigned int startcolumn, 
+           unsigned int destrow, unsigned int destcolumn, 
+           unsigned int field[][8][2])
 {
     // row and column addition variables added every loop
     int bishoprowadd = destrow > startrow ? 1 : -1;
@@ -44,10 +48,14 @@ int Bishop(unsigned int startrow, unsigned int startcolumn, unsigned int destrow
 }
 
 // checks if there is a piece in the way of the players move
-int CheckBlocked(char activePlayer, unsigned int startrow, unsigned int startcolumn, unsigned int destrow, unsigned int destcolumn, unsigned int field[][8][2])
+int CheckBlocked(char activePlayer, 
+                 unsigned int startrow, unsigned int startcolumn, 
+                 unsigned int destrow, unsigned int destcolumn, 
+                 unsigned int field[][8][2])
 {
     // checks for own piece in destination
-    if(field[destrow][destcolumn][0] && (field[destrow][destcolumn][1] == (unsigned int)activePlayer))
+    if(field[destrow][destcolumn][0] && 
+      (field[destrow][destcolumn][1] == (unsigned int)activePlayer))
         return 0;
     switch(field[startrow][startcolumn][0])
     {
@@ -59,7 +67,8 @@ int CheckBlocked(char activePlayer, unsigned int startrow, unsigned int startcol
                 if(field[destrow][destcolumn][0])
                     return 0;
                 // if moving 2 fields
-                else if((abs((int)destrow - (int)startrow) == 2) && field[(destrow + startrow) / 2][destcolumn][0])
+                else if((abs((int)destrow - (int)startrow) == 2) && 
+                        field[(destrow + startrow) / 2][destcolumn][0])
                     return 0;
             }
             break;

@@ -1,5 +1,8 @@
 // Check whether the move is valid
-int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn, unsigned int destrow, unsigned int destcolumn, unsigned int field[][8][2])
+int CheckMove(char activePLayer, 
+              unsigned int startrow, unsigned int startcolumn, 
+              unsigned int destrow, unsigned int destcolumn, 
+              unsigned int field[][8][2])
 {
     if(field[startrow][startcolumn][1] == (unsigned int) activePLayer)
     {
@@ -13,19 +16,23 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
                     // move direction decided by activePlayer
                     if(activePLayer)
                     {
-                        if((destrow == startrow - 1) || ((startrow == 6) && (destrow == 4)))
+                        if((destrow == startrow - 1) || 
+                          ((startrow == 6) && (destrow == 4)))
                             return 1;
                     } 
                     else
                     {
-                        if((destrow == startrow + 1) || ((startrow == 1) && (destrow == 3)))
+                        if((destrow == startrow + 1) || 
+                          ((startrow == 1) && (destrow == 3)))
                             return 1;
                     }
                 }
                 // taking a piece (diagonal)
-                else if(field[destrow][destcolumn][0] && field[destrow][destcolumn][1] != (unsigned int)activePLayer)
+                else if(field[destrow][destcolumn][0] && 
+                        field[destrow][destcolumn][1] != (unsigned int)activePLayer)
                 {
-                    if((destcolumn - startcolumn == 1) || (startcolumn - destcolumn == 1))
+                    if((destcolumn - startcolumn == 1) || 
+                      (startcolumn - destcolumn == 1))
                     {
                         // move direction
                         if(activePLayer && (destrow == startrow - 1))
@@ -43,7 +50,8 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
             // Knight
             case 3:
                 // move : 1 field vertically or horizontally and then 2 the other of the two
-                if(((abs((int)destrow - (int)startrow) == 1) && (abs((int)destcolumn - (int)startcolumn) == 2)) || ((abs((int)destcolumn - (int)startcolumn) == 1) && (abs((int)destrow - (int)startrow) == 2)))
+                if(((abs((int)destrow - (int)startrow) == 1) && (abs((int)destcolumn - (int)startcolumn) == 2)) || 
+                  ((abs((int)destcolumn - (int)startcolumn) == 1) && (abs((int)destrow - (int)startrow) == 2)))
                     return 1;
                 break;
             // Bishop
@@ -55,13 +63,16 @@ int CheckMove(char activePLayer, unsigned int startrow, unsigned int startcolumn
             // Queen
             case 5:
                 // combination of rook and bishop
-                if((destrow == startrow) || (destcolumn == startcolumn) || abs((int)destrow - (int)startrow) == abs((int)destcolumn - (int)startcolumn))
+                if((destrow == startrow) || 
+                  (destcolumn == startcolumn) || 
+                  abs((int)destrow - (int)startrow) == abs((int)destcolumn - (int)startcolumn))
                     return 1;
                 break;
             // King
             case 6:
                 // move : 1 in any direction
-                if((abs((int)destrow - (int)startrow) < 2) && (abs((int)destcolumn - (int)startcolumn) < 2))
+                if((abs((int)destrow - (int)startrow) < 2) && 
+                  (abs((int)destcolumn - (int)startcolumn) < 2))
                     return 1;
                 break;
             // no selected
