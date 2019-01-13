@@ -82,8 +82,6 @@ int main()
             continue;
         }
 
-        // TODO: DOESN'T WORK RIGHT NOW
-        // Changes it every time 
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
         else if (mouse.lastMouseX != mouse.newMouseX
