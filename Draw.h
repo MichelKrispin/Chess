@@ -4,28 +4,28 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
     switch (row)
     {
         case 0:
-              *yPixel = 45; 
+              *yPixel = 35; 
             break;
         case 1:
-              *yPixel = 115; 
+              *yPixel = 103; 
             break;
         case 2:
-              *yPixel = 185; 
+              *yPixel = 171; 
             break;
         case 3:
-              *yPixel = 250; 
+              *yPixel = 240; 
             break;
         case 4:
-              *yPixel = 320; 
+              *yPixel = 308; 
             break;
         case 5:
-              *yPixel = 385; 
+              *yPixel = 375; 
             break;
         case 6:
-              *yPixel = 450; 
+              *yPixel = 442; 
             break;
         case 7:
-              *yPixel = 520; 
+              *yPixel = 509; 
             break;
 
     }
@@ -33,28 +33,28 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
     switch (column)
     {
         case 0:
-              *xPixel = 50; 
+              *xPixel = 35; 
             break;
         case 1:
-              *xPixel = 115; 
+              *xPixel = 103; 
             break;
         case 2:
-              *xPixel = 185; 
+              *xPixel = 171; 
             break;
         case 3:
-              *xPixel = 245; 
+              *xPixel = 237; 
             break;
         case 4:
-              *xPixel = 320; 
+              *xPixel = 308; 
             break;
         case 5:
-              *xPixel = 390; 
+              *xPixel = 375; 
             break;
         case 6:
-              *xPixel = 455; 
+              *xPixel = 442; 
             break;
         case 7:
-              *xPixel = 525; 
+              *xPixel = 509; 
             break;
 
     }
@@ -147,8 +147,8 @@ int Draw(unsigned int field[8][8][2],
             SDL_Rect destinationPosition;
             destinationPosition.x = xPixel;
             destinationPosition.y = yPixel;
-            destinationPosition.w = 30;
-            destinationPosition.h = 45;
+            destinationPosition.w = 60;
+            destinationPosition.h = 60;
  
             
             switch(field[rowcount][columnc][0])
