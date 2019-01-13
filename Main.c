@@ -31,7 +31,7 @@ int main()
 
     // For the MousePosition
     MousePosition mouse = {0, 0, 0, 0};
-    char clickIndex = 0; // If 0 first click 1 second click
+    char clickIndex = -1; // If 0 first click 1 second click
   
     Figure figures[32];
     InitializeFigures(figures, &window);
@@ -87,7 +87,7 @@ int main()
         else if (mouse.lastMouseX != mouse.newMouseX
          || mouse.lastMouseY != mouse.newMouseY)
         {
-            if (clickIndex == 0)
+            if (clickIndex == 0 || clickIndex == -1)
                 TransformPixelToRowColumn(
                         mouse.newMouseX,
                         &startcolumn,
@@ -104,7 +104,10 @@ int main()
             mouse.lastMouseX = mouse.newMouseX;
             mouse.lastMouseY = mouse.newMouseY;
 
-            clickIndex = clickIndex ? 0 : 1;
+            if (clickIndex == -1)
+                clickIndex = 1;
+            else
+                clickIndex = clickIndex ? 0 : 1;
         }
         
         // If everything is alright move the figure
