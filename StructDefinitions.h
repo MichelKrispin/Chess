@@ -14,7 +14,8 @@ typedef struct Figure
     SDL_Texture* texture;
     // Contains x, y, w, h
     SDL_Rect imageInfo;
-    char type[2]; // Used for identifying the figure i.e. wp for white pawn
+    // Used for identifying the figure i.e. wp for white pawn
+    char type[2];
     char isSet;
 } Figure;
 

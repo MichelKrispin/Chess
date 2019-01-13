@@ -1,71 +1,59 @@
 void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
                                 int* xPixel, int* yPixel)
 {
-    /* TODO: Calculate simple
-    // Calculate row to y data
-    row += 1;
-    *yPixel = row * 40;
-   
-    // Calculate column to x data
-    column += 1;
-    *xPixel = column * 40 + 20;
-    */
-
-    row += 1;
     switch (row)
     {
-        case 1:
+        case 0:
               *yPixel = 45; 
             break;
-        case 2:
+        case 1:
               *yPixel = 115; 
             break;
-        case 3:
+        case 2:
               *yPixel = 185; 
             break;
-        case 4:
+        case 3:
               *yPixel = 250; 
             break;
-        case 5:
+        case 4:
               *yPixel = 320; 
             break;
-        case 6:
+        case 5:
               *yPixel = 385; 
             break;
-        case 7:
+        case 6:
               *yPixel = 450; 
             break;
-        case 8:
+        case 7:
               *yPixel = 520; 
             break;
 
     }
 
-    column += 1;
     switch (column)
     {
-        case 1:
+        case 0:
               *xPixel = 50; 
             break;
-        case 2:
+        case 1:
               *xPixel = 115; 
             break;
-        case 3:
+        case 2:
               *xPixel = 185; 
             break;
-        case 4:
+        case 3:
               *xPixel = 245; 
             break;
-        case 5:
+        case 4:
               *xPixel = 320; 
             break;
-        case 6:
+        case 5:
               *xPixel = 390; 
             break;
-        case 7:
+        case 6:
               *xPixel = 455; 
             break;
-        case 8:
+        case 7:
               *xPixel = 525; 
             break;
 
@@ -75,44 +63,43 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
 
 void TransformPixelToRowColumn(
         int  pixelInputX,
-        unsigned int* rowOutput,
+        unsigned int* columnOutput,
         int  pixelInputY,
-        unsigned int* columnOutput)
+        unsigned int* rowOutput)
 {
-    if (pixelInputY < 45)
+    if (pixelInputX > 30 && pixelInputX < 95)
+        *columnOutput = 0;
+    else if (pixelInputX < 163)
         *columnOutput = 1;
-    else if (pixelInputY < 115)
+    else if (pixelInputX < 231)
         *columnOutput = 2;
-    else if (pixelInputY < 185)
+    else if (pixelInputX < 300)
         *columnOutput = 3;
-    else if (pixelInputY < 250)
+    else if (pixelInputX < 368)
         *columnOutput = 4;
-    else if (pixelInputY < 320)
+    else if (pixelInputX < 435)
         *columnOutput = 5;
-    else if (pixelInputY < 385)
+    else if (pixelInputX < 502)
         *columnOutput = 6;
-    else if (pixelInputY < 450)
+    else if (pixelInputX < 569)
         *columnOutput = 7;
-    else if (pixelInputY < 520)
-        *columnOutput = 8;
     
-    if (pixelInputX < 50)
+    if (pixelInputY > 30 && pixelInputY < 95)
+        *rowOutput = 0;
+    else if (pixelInputY < 163)
         *rowOutput = 1;
-    else if (pixelInputX < 115)
+    else if (pixelInputY < 231)
         *rowOutput = 2;
-    else if (pixelInputX < 185)
+    else if (pixelInputY < 300)
         *rowOutput = 3;
-    else if (pixelInputX < 245)
+    else if (pixelInputY < 368)
         *rowOutput = 4;
-    else if (pixelInputX < 320)
+    else if (pixelInputY < 435)
         *rowOutput = 5;
-    else if (pixelInputX < 390)
+    else if (pixelInputY < 502)
         *rowOutput = 6;
-    else if (pixelInputX < 455)
+    else if (pixelInputY < 569)
         *rowOutput = 7;
-    else if (pixelInputX < 525)
-        *rowOutput = 8;
-
 }
 
 int Draw(unsigned int field[8][8][2],
@@ -131,8 +118,11 @@ int Draw(unsigned int field[8][8][2],
             return 0;
         break;
         case SDL_MOUSEBUTTONDOWN:
-            mouse->newMouseX = event.motion.x;
-            mouse->newMouseY = event.motion.y;
+            SDL_GetMouseState(&mouse->newMouseX, &mouse->newMouseY);
+
+            // For debug purposes
+            //printf("mouseX: %d, mouseY: %d\n",
+            //        mouse->newMouseX, mouse->newMouseY);
         break;
     }
 

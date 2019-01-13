@@ -31,6 +31,7 @@ int main()
 
     // For the MousePosition
     MousePosition mouse = {0, 0, 0, 0};
+    char clickIndex = 0; // If 0 first click 1 second click
   
     Figure figures[32];
     InitializeFigures(figures, &window);
@@ -85,28 +86,36 @@ int main()
         // Changes it every time 
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
-        if (mouse.lastMouseX != mouse.newMouseX
+        else if (mouse.lastMouseX != mouse.newMouseX
          || mouse.lastMouseY != mouse.newMouseY)
         {
-            TransformPixelToRowColumn(
-                    mouse.lastMouseX,
-                    &startrow,
-                    mouse.lastMouseY,
-                    &startcolumn);
+            if (clickIndex == 0)
+                TransformPixelToRowColumn(
+                        mouse.newMouseX,
+                        &startcolumn,
+                        mouse.newMouseY,
+                        &startrow);
 
-            TransformPixelToRowColumn(
-                    mouse.newMouseX,
-                    &destrow,
-                    mouse.newMouseY,
-                    &destcolumn);
+            else if (clickIndex == 1)
+                TransformPixelToRowColumn(
+                        mouse.newMouseX,
+                        &destcolumn,
+                        mouse.newMouseY,
+                        &destrow);
+
             mouse.lastMouseX = mouse.newMouseX;
             mouse.lastMouseY = mouse.newMouseY;
+
+            clickIndex = clickIndex ? 0 : 1;
         }
-        //printf("startrow: %u, startcol: %u\ndestrow: %u, destcol: %u",
-        //        startrow, startcolumn, destrow, destcolumn);
         
-        // If everything is allright move the figure
-        Move(startrow, startcolumn, destrow, destcolumn, field);
+        // If everything is alright move the figure
+        // The clickIndex needs to be 0 again
+        // because two clicks are covered now
+        if (clickIndex == 0)
+        {
+            Move(startrow, startcolumn, destrow, destcolumn, field);
+        }
 
         // Check if check or checkmate
         CheckCheckmate(field);
