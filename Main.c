@@ -2,6 +2,7 @@
 #include <wchar.h>
 #include <locale.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "StructDefinitions.h"
 #include "ConsoleColors.h"
@@ -10,7 +11,7 @@
 #include "CheckMove.h"
 #include "CheckLogic.h"
 #include "Move.h"
-#include "CheckCheckmate.h"
+#include "CheckChecked.h"
 #include "GetInput.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
@@ -76,7 +77,7 @@ int main()
             continue;
         }
         // Check if logic is valid on this move
-        if (!CheckLogic(startrow, startcolumn, destrow, destcolumn, field))
+        if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
         {
             printf("Invalid move\n");
             continue;
@@ -119,7 +120,13 @@ int main()
         }
 
         // Check if check or checkmate
-        CheckCheckmate(field);
+        if(CheckChecked(field))
+        {
+            if(CheckCheckmate(field))
+            {
+                isPlaying = 0;
+            }
+        }
 
        
 
@@ -131,7 +138,7 @@ int main()
         //printf("%s\n", SDL_GetError());
 
         // Toggle active player
-        activePlayer = activePlayer ? 1 : 0;
+        activePlayer = activePlayer ? 0 : 1;
     }
 
     CleanupSDL(&window, figures, 32);

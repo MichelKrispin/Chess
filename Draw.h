@@ -27,7 +27,6 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
         case 7:
               *yPixel = 509; 
             break;
-
     }
 
     switch (column)
@@ -269,8 +268,6 @@ int Draw(unsigned int field[8][8][2],
         }
     }
     
-
-     
     SDL_RenderPresent(sdlWindow->renderer);
     
     return 1;
