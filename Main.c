@@ -11,6 +11,7 @@
 #include "CheckLogic.h"
 #include "Move.h"
 #include "CheckChecked.h"
+#include "CheckCheckmate.h"
 #include "GetInput.h"
 
 int main()
@@ -69,11 +70,15 @@ int main()
         Move(startrow, startcolumn, destrow, destcolumn, field);
 
         // Check if check or checkmate
-        if(CheckChecked(field))
+        if(CheckChecked(activePlayer, field))
         {
             if(CheckCheckmate(field))
             {
                 isPlaying = 0;
+            }
+            else
+            {
+                printf("Check!");
             }
         }
 
