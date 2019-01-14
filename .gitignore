@@ -2,12 +2,13 @@
 *.d
 *.vscode
 build.sh
-tests.c
+buildSDL.sh
 Makefile
 .DS_Store
 *~
 *.swp
 *.swo
+lib/
 
 # Object files
 *.o

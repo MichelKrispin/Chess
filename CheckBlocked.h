@@ -105,3 +105,4 @@ int CheckBlocked(char activePlayer,
     }
     return 1;
 }
+
