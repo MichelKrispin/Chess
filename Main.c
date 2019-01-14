@@ -6,8 +6,8 @@
 
 #include "StructDefinitions.h"
 #include "ConsoleColors.h"
-#include "Draw.h"
 #include "Initialize.h"
+#include "Draw.h"
 #include "CheckMove.h"
 #include "CheckLogic.h"
 #include "CheckCheckmate.h"
@@ -48,48 +48,29 @@ int main()
     char activePlayer = 1;
     // Bool for checking only once
     char oneTimeChecking = 0;
+    // Bool for isMovable
+    char isMovable = 0;
     
     Draw(field, &window, figures, &mouse);
 
     while (isPlaying)
     {
-        
-        // Input is not taken at this moment
-        int inputCode = 1; //GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
-
-        if (!inputCode)
-        {
-            printf("Invalid input\n");
-            continue;
-        } else if (inputCode == 2)
-        {
-            isPlaying = 0;
-        } else if (inputCode == 2)
-        {
-            printf("%s gives up!\n %s wins!\n",
-                     activePlayer ? "White" : "Black",
-                     activePlayer ? "Black" : "White" );
-            isPlaying = 0;
-        }
-
-
         // Check if the move is valid
         if (clickIndex == 0 && oneTimeChecking == 0)
         {
-            // TODO: Add bool to only check once after clickindex == 0
-
+            oneTimeChecking = 1;
+            isMovable = 1;
             if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
                 printf("Can't move this way\n");
-                continue;
+                isMovable = 0;
             }
             // Check if logic is valid on this move
             if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
                 printf("Invalid move\n");
-                continue;
+                isMovable = 0;
             }
-            oneTimeChecking = 1;
         }
 
         // Reset oneTimeChecking
@@ -98,7 +79,7 @@ int main()
         
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
-        else if (mouse.lastMouseX != mouse.newMouseX
+        if (mouse.lastMouseX != mouse.newMouseX
          || mouse.lastMouseY != mouse.newMouseY)
         {
             if (clickIndex == 0 || clickIndex == -1)
@@ -127,9 +108,12 @@ int main()
         // If everything is alright move the figure
         // The clickIndex needs to be 0 again
         // because two clicks are covered now
-        if (clickIndex == 0)
+        if (clickIndex == 0 && isMovable == 1)
         {
             Move(startrow, startcolumn, destrow, destcolumn, field);
+            // Toggle active player
+            activePlayer = activePlayer ? 0 : 1;
+            isMovable = 0;
         }
 
         // Check if check or checkmate
@@ -150,8 +134,6 @@ int main()
         // Prints Error for debug purposes
         //printf("%s\n", SDL_GetError());
 
-        // Toggle active player
-        activePlayer = activePlayer ? 0 : 1;
     }
 
     CleanupSDL(&window, figures, 32);

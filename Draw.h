@@ -123,6 +123,19 @@ int Draw(unsigned int field[8][8][2],
             //printf("mouseX: %d, mouseY: %d\n",
             //        mouse->newMouseX, mouse->newMouseY);
         break;
+        case SDL_KEYDOWN:
+            // Quit game
+            if (event.key.keysym.sym == SDLK_ESCAPE)
+                return 0;
+            // Reset game
+            if (event.key.keysym.sym == SDLK_r)
+            {
+               InitializeField(field); 
+               return 1;
+            }
+            // TODO: g for give up
+
+        break;
     }
 
     // Render background
