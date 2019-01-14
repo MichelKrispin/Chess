@@ -136,6 +136,7 @@ int main()
 
     }
 
+    // TODO: Cleanup
     CleanupSDL(&window, figures, 32);
     return 0;
 }

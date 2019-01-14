@@ -131,6 +131,7 @@ int Draw(unsigned int field[8][8][2],
             if (event.key.keysym.sym == SDLK_r)
             {
                InitializeField(field); 
+               // TODO: Set active player to white
                return 1;
             }
             // TODO: g for give up
@@ -138,8 +139,15 @@ int Draw(unsigned int field[8][8][2],
         break;
     }
 
-    // Render background
-    SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, NULL);
+    {
+        // Render background
+        SDL_Rect tempPos;
+        tempPos.x = 0;
+        tempPos.y = 0;
+        tempPos.w = 600;
+        tempPos.h = 600;
+        SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, &tempPos);
+    }
 
     // Set all isSet flags of all figures to 0
     for (int i = 0; i < 32; i++)

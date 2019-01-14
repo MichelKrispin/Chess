@@ -11,7 +11,7 @@ int InitializeSDL(Window* sdlWindow)
                                           SDL_WINDOWPOS_UNDEFINED, // initial x position
                                           SDL_WINDOWPOS_UNDEFINED, // initial y position
                                           600,  // width, in pixels
-                                          600,  // height, in pixels
+                                          800,  // height, in pixels
                                           SDL_WINDOW_OPENGL  // flags - see below
                                           );
     
@@ -31,16 +31,6 @@ int InitializeSDL(Window* sdlWindow)
     
    
     return 0;
-}
-
-
-int RenderOnScreen(Window* sdlWindow, Figure *figures)
-{
-    SDL_Window* a;
-    a = sdlWindow->window;
-    char b;
-    b = figures[0].isSet;
-    return 1;
 }
 
 
