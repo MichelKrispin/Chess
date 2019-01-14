@@ -10,6 +10,7 @@
 #include "Initialize.h"
 #include "CheckMove.h"
 #include "CheckLogic.h"
+#include "CheckCheckmate.h"
 #include "Move.h"
 #include "CheckChecked.h"
 #include "GetInput.h"
@@ -45,7 +46,8 @@ int main()
     char isPlaying = 1;
     // Bool indicating the active player (White=1, Black=0)
     char activePlayer = 1;
-
+    // Bool for checking only once
+    char oneTimeChecking = 0;
     
     Draw(field, &window, figures, &mouse);
 
@@ -54,6 +56,7 @@ int main()
         
         // Input is not taken at this moment
         int inputCode = 1; //GetInput(&startrow, &startcolumn, &destrow, &destcolumn);
+
         if (!inputCode)
         {
             printf("Invalid input\n");
@@ -71,18 +74,28 @@ int main()
 
 
         // Check if the move is valid
-        if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+        if (clickIndex == 0 && oneTimeChecking == 0)
         {
-            printf("Can't move this way\n");
-            continue;
-        }
-        // Check if logic is valid on this move
-        if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
-        {
-            printf("Invalid move\n");
-            continue;
+            // TODO: Add bool to only check once after clickindex == 0
+
+            if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+            {
+                printf("Can't move this way\n");
+                continue;
+            }
+            // Check if logic is valid on this move
+            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+            {
+                printf("Invalid move\n");
+                continue;
+            }
+            oneTimeChecking = 1;
         }
 
+        // Reset oneTimeChecking
+        if (clickIndex == 1)
+            oneTimeChecking = 0;
+        
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
         else if (mouse.lastMouseX != mouse.newMouseX
