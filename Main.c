@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "StructDefinitions.h"
-#include "ConsoleColors.h"
 #include "Initialize.h"
 #include "Draw.h"
 #include "CheckMove.h"
