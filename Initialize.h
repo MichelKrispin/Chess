@@ -35,6 +35,8 @@ void InitializeField(unsigned int field[][8][2])
             }
             if(rowcount > 5)
                 field[rowcount][columnc][1] = 1;                // weiße Farbe
+            else
+                field[rowcount][columnc][1] = 0;                // schwarz Farbe
         }
     }
  

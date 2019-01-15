@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "StructDefinitions.h"
-#include "ConsoleColors.h"
 #include "Initialize.h"
 #include "Draw.h"
 #include "CheckMove.h"
@@ -13,7 +12,6 @@
 #include "Move.h"
 #include "CheckChecked.h"
 #include "CheckCheckmate.h"
-#include "GetInput.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
 
