@@ -16,7 +16,7 @@
 #include "InitializeSDL.h"
 
 
-int main()
+int main(int argsc, char* argv[])
 {
     // Initialize array to 0
     unsigned int field[8][8][2];                          
@@ -69,6 +69,19 @@ int main()
                 printf("Invalid move\n");
                 isMovable = 0;
             }
+
+            // Check if check or checkmate
+            if (CheckChecked(activePlayer, field))
+            {
+                /*if(CheckCheckmate(field))
+            {
+                isPlaying = 0;
+            }
+            else
+            {*/
+                printf("Check!");
+                //}
+            }
         }
 
         // Reset oneTimeChecking
@@ -113,23 +126,6 @@ int main()
             activePlayer = activePlayer ? 0 : 1;
             isMovable = 0;
         }
-
-        // Check if check or checkmate
-        /*
-        if(CheckChecked(activePlayer, field))
-        {
-            if(CheckCheckmate(field))
-            {
-                isPlaying = 0;
-            }
-            else
-            {
-                printf("Check!");
-            }
-        }
-        */
-
-       
 
         // Draw the field
         isPlaying = Draw(field, &window, figures, &mouse);
