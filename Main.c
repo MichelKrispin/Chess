@@ -69,19 +69,6 @@ int main(int argsc, char* argv[])
                 printf("Invalid move\n");
                 isMovable = 0;
             }
-
-            // Check if check or checkmate
-            if (CheckChecked(activePlayer, field))
-            {
-                /*if(CheckCheckmate(field))
-            {
-                isPlaying = 0;
-            }
-            else
-            {*/
-                printf("Check!");
-                //}
-            }
         }
 
         // Reset oneTimeChecking
@@ -122,6 +109,19 @@ int main(int argsc, char* argv[])
         if (clickIndex == 0 && isMovable == 1)
         {
             Move(startrow, startcolumn, destrow, destcolumn, field);
+
+            // Check if check or checkmate
+            if (CheckChecked(field))
+            {
+                /*if(CheckCheckmate(field))
+            {
+                isPlaying = 0;
+            }
+            else
+            {*/
+                printf("Check!");
+                //}
+            }
             // Toggle active player
             activePlayer = activePlayer ? 0 : 1;
             isMovable = 0;

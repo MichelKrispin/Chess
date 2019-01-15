@@ -1,1 +1,1 @@
-gcc Main.c -Iinclude -Llib -lmingw32 -lSDL2main -lSDL2 -o Main.exe
+gcc Main.c -Iinclude -Llib -lmingw32 -g -lSDL2main -lSDL2 -o Main.exe
