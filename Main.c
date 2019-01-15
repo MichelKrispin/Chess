@@ -13,7 +13,6 @@
 #include "Move.h"
 #include "CheckChecked.h"
 #include "CheckCheckmate.h"
-#include "GetInput.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
 
