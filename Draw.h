@@ -104,7 +104,8 @@ void TransformPixelToRowColumn(
 int Draw(unsigned int field[8][8][2],
          Window* sdlWindow,
          Figure* figures,
-         MousePosition* mouse)
+         MousePosition* mouse,
+         char* activePlayer)
 {
     SDL_Event event;
 
@@ -131,7 +132,7 @@ int Draw(unsigned int field[8][8][2],
             if (event.key.keysym.sym == SDLK_r)
             {
                InitializeField(field); 
-               // TODO: Set active player to white
+               *activePlayer = 1;
                return 1;
             }
             // TODO: g for give up
@@ -145,8 +146,23 @@ int Draw(unsigned int field[8][8][2],
         tempPos.x = 0;
         tempPos.y = 0;
         tempPos.w = 600;
-        tempPos.h = 600;
+        tempPos.h = 800;
         SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, &tempPos);
+    }
+
+    // Draw white or black queen depending on activePlayer
+    // TODO:
+    {
+        // Render background
+        SDL_Rect tempPos;
+        tempPos.x = 500;
+        tempPos.y = 670;
+        tempPos.w = 60;
+        tempPos.h = 60;
+        if (*activePlayer == 1) // White player
+            SDL_RenderCopy(sdlWindow->renderer, sdlWindow->whiteQueen, NULL, &tempPos);
+        else // Black player
+            SDL_RenderCopy(sdlWindow->renderer, sdlWindow->blackQueen, NULL, &tempPos);
     }
 
     // Set all isSet flags of all figures to 0
@@ -154,7 +170,6 @@ int Draw(unsigned int field[8][8][2],
     {
         figures[i].isSet = 0;
     }
-   
     
     // Zeilenschleife
     for(unsigned int rowcount = 0; rowcount < 8; rowcount++)

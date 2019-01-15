@@ -28,7 +28,17 @@ int InitializeSDL(Window* sdlWindow)
     sdlWindow->chessField = SDL_LoadBMP("media/ChessField.bmp");
     sdlWindow->background = SDL_CreateTextureFromSurface(
             sdlWindow->renderer, sdlWindow->chessField);
-    
+
+    // Create additional white and black queen images
+    SDL_Surface* wQueen = SDL_LoadBMP("media/W_Queen.bmp");
+    sdlWindow->whiteQueen = SDL_CreateTextureFromSurface(
+            sdlWindow->renderer, wQueen);
+    SDL_FreeSurface(wQueen);
+
+    SDL_Surface* bQueen = SDL_LoadBMP("media/B_Queen.bmp");
+    sdlWindow->blackQueen = SDL_CreateTextureFromSurface(
+            sdlWindow->renderer, bQueen);
+    SDL_FreeSurface(bQueen);
    
     return 0;
 }
