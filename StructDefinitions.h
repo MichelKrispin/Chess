@@ -6,6 +6,8 @@ typedef struct Window
     SDL_Renderer* renderer;
     SDL_Surface* chessField;
     SDL_Texture* background;
+    SDL_Texture* whiteQueen;
+    SDL_Texture* blackQueen;
 } Window;
 
 typedef struct Figure

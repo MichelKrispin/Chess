@@ -49,7 +49,7 @@ int main()
     // Bool for isMovable
     char isMovable = 0;
     
-    Draw(field, &window, figures, &mouse);
+    Draw(field, &window, figures, &mouse, &activePlayer);
 
     while (isPlaying)
     {
@@ -132,7 +132,11 @@ int main()
        
 
         // Draw the field
-        isPlaying = Draw(field, &window, figures, &mouse);
+        isPlaying = Draw(field,
+                         &window,
+                         figures,
+                         &mouse,
+                         &activePlayer);
         
         
         // Prints Error for debug purposes
