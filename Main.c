@@ -6,14 +6,15 @@
 
 #include "StructDefinitions.h"
 #include "Initialize.h"
-#include "Draw.h"
-#include "CheckMove.h"
-#include "CheckLogic.h"
-#include "Move.h"
-#include "CheckChecked.h"
-#include "CheckCheckmate.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
+#include "Draw.h"
+#include "Move.h"
+#include "CheckMove.h"
+#include "CheckBlocked.h"
+#include "CheckChecked.h"
+#include "CheckLogic.h"
+#include "CheckCheckmate.h"
 
 
 int main(int argsc, char* argv[])
@@ -114,12 +115,12 @@ int main(int argsc, char* argv[])
             if (CheckChecked(field))
             {
                 /*if(CheckCheckmate(field))
-            {
+                {
                 isPlaying = 0;
-            }
-            else
-            {*/
-                printf("Check!");
+                }
+                else
+                {*/
+                    printf("Check!\n");
                 //}
             }
             // Toggle active player

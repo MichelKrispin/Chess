@@ -31,15 +31,15 @@ int CheckChecked(unsigned int field[][8][2])
     {
         FindKing(&kingrow, &kingcolumn, field);
         // checks every fieldpos. for a piece that could take the kingpiece
-        for(unsigned int srow = 0; srow < 8; srow++)
+        for(unsigned int startrow = 0; startrow < 8; startrow++)
         {
-            for(unsigned int scolumn = 0; scolumn < 8; scolumn++)
+            for(unsigned int startcolumn = 0; startcolumn < 8; startcolumn++)
             {
-                if(CheckMove(field[srow][scolumn][1], srow, scolumn, kingrow, kingcolumn, field)
-                  && CheckLogic(field[srow][scolumn][1], srow, scolumn, kingrow, kingcolumn, field))
+                if(CheckMove(field[startrow][startcolumn][1], startrow, startcolumn, kingrow, kingcolumn, field)
+                  && CheckBlocked(field[startrow][startcolumn][1], startrow, startcolumn, kingrow, kingcolumn, field))
                 {
-                    // returns the color of the piece (1 = white, -1 black)
-                    return field[srow][scolumn][1] ? 1 : -1;
+                    // returns the color of the player that's in check (-1 black, 1 = white)
+                    return field[startrow][startcolumn][1] ? -1 : 1;
                 }
             }
         }
