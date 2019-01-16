@@ -9,6 +9,8 @@ Makefile
 *.swp
 *.swo
 lib/
+build/
+!build/media/*
 
 # Object files
 *.o
