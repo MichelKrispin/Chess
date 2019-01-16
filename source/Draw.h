@@ -150,8 +150,11 @@ int Draw(unsigned int field[8][8][2],
         SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, &tempPos);
     }
 
+    // Draw text message if there is any
+    DrawTextfield(sdlWindow);
+
+
     // Draw white or black queen depending on activePlayer
-    // TODO:
     {
         // Render background
         SDL_Rect tempPos;

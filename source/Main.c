@@ -8,6 +8,7 @@
 #include "Initialize.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
+#include "DrawTextfield.h"
 #include "Draw.h"
 #include "Move.h"
 #include "CheckMove.h"
@@ -64,13 +65,15 @@ int main(int argsc, char* argv[])
             isMovable = 1;
             if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
-                printf("Can't move this way\n");
+                strcpy(window.Message, "Can't move this way!");
+                //printf("Can't move this way\n");
                 isMovable = 0;
             }
             // Check if logic is valid on this move
             if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
-                printf("Invalid move\n");
+                strcpy(window.Message, "Invalid move!");
+                //printf("Invalid move\n");
                 isMovable = 0;
             }
         }
@@ -120,13 +123,16 @@ int main(int argsc, char* argv[])
                 if(CheckCheckmate(field))
                 {
                     if(CheckCheckmate(field) == 1)
-                        printf("Checkmate!\n");
+                        strcpy(window.Message, "Checkmate");
+                        //printf("Checkmate!\n");
                     else
-                        printf("Stalemate!\n");
+                        strcpy(window.Message, "Stalemate");
+                        //printf("Stalemate!\n");
                 }
                 else
                 { 
-                    printf("Check!\n");
+                    strcpy(window.Message, "Check!");
+                    //printf("Check!\n");
                 }
             }
             // Toggle active player

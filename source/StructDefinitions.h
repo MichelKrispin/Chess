@@ -8,6 +8,7 @@ typedef struct Window
     SDL_Texture* background;
     SDL_Texture* whiteQueen;
     SDL_Texture* blackQueen;
+    char Message[50];
 } Window;
 
 typedef struct Figure
