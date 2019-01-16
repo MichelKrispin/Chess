@@ -114,14 +114,17 @@ int main(int argsc, char* argv[])
             // Check if check or checkmate
             if (CheckChecked(field))
             {
-                /*if(CheckCheckmate(field))
+                if(CheckCheckmate(field))
                 {
-                isPlaying = 0;
+                    if(CheckCheckmate(field) == 1)
+                        printf("Checkmate!\n");
+                    else
+                        printf("Stalemate!\n");
                 }
                 else
-                {*/
+                { 
                     printf("Check!\n");
-                //}
+                }
             }
             // Toggle active player
             activePlayer = activePlayer ? 0 : 1;
