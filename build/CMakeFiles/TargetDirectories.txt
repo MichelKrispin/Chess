@@ -1,3 +1,0 @@
-/Users/Michel/Documents/TUHH/Prozedurale Programmierung/Project/Schach/build/CMakeFiles/rebuild_cache.dir
-/Users/Michel/Documents/TUHH/Prozedurale Programmierung/Project/Schach/build/CMakeFiles/edit_cache.dir
-/Users/Michel/Documents/TUHH/Prozedurale Programmierung/Project/Schach/build/CMakeFiles/Chess.dir
