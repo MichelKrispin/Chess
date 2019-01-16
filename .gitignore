@@ -9,6 +9,7 @@ Makefile
 *.swp
 *.swo
 lib/
+build/
 
 # Object files
 *.o
