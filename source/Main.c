@@ -16,6 +16,9 @@
 #include "CheckLogic.h"
 #include "CheckCheckmate.h"
 
+#ifdef main
+# undef main
+#endif /* main */
 
 int main(int argsc, char* argv[])
 {
