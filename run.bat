@@ -1,1 +1,3 @@
-.\build\Chess
+cd build
+Chess
+cd ..
