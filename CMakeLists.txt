@@ -4,8 +4,6 @@ project (Chess C)
 if (WIN32)
     set(SDL2_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/sdl/include/SDL2/")
     set(SDL2_LIBRARIES "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2main.a"
-                       "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2_ttf.a"
-                       "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2_ttf.dll.a"
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.dll.a"
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.a")
 else()
