@@ -1,4 +1,12 @@
-#include "SDL2/SDL.h"
+#include "SDL.h"
+
+typedef struct PositionCircle
+{
+    unsigned int row;
+    unsigned int column;
+    char isSet;
+} PositionCircle;
+
 
 typedef struct Window
 {
@@ -8,6 +16,8 @@ typedef struct Window
     SDL_Texture* background;
     SDL_Texture* whiteQueen;
     SDL_Texture* blackQueen;
+    char message;
+    PositionCircle circle;
 } Window;
 
 typedef struct Figure

@@ -8,7 +8,9 @@
 #include "Initialize.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
+#include "DrawTextfield.h"
 #include "Draw.h"
+#include "DrawCircle.h"
 #include "Move.h"
 #include "CheckMove.h"
 #include "CheckBlocked.h"
@@ -16,6 +18,9 @@
 #include "CheckLogic.h"
 #include "CheckCheckmate.h"
 
+#ifdef main
+# undef main
+#endif /* main */
 
 int main(int argsc, char* argv[])
 {
@@ -61,20 +66,25 @@ int main(int argsc, char* argv[])
             isMovable = 1;
             if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
-                printf("Can't move this way\n");
+                window.message = 1;
+                //printf("Can't move this way\n");
                 isMovable = 0;
             }
             // Check if logic is valid on this move
-            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field) && window.message != 1)
             {
-                printf("Invalid move\n");
+                //printf("Invalid move\n");
+                window.message = 1;
                 isMovable = 0;
             }
         }
 
-        // Reset oneTimeChecking
+        // Reset oneTimeChecking and message
         if (clickIndex == 1)
+        {
             oneTimeChecking = 0;
+            window.message = 0;
+        }
         
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
@@ -82,18 +92,30 @@ int main(int argsc, char* argv[])
          || mouse.lastMouseY != mouse.newMouseY)
         {
             if (clickIndex == 0 || clickIndex == -1)
+            {
                 TransformPixelToRowColumn(
                         mouse.newMouseX,
                         &startcolumn,
                         mouse.newMouseY,
                         &startrow);
+                window.circle.isSet = 1;
+                window.circle.row = startrow;
+                window.circle.column = startcolumn;
+            }
 
             else if (clickIndex == 1)
+            {
                 TransformPixelToRowColumn(
                         mouse.newMouseX,
                         &destcolumn,
                         mouse.newMouseY,
                         &destrow);
+                window.circle.isSet = 0;
+            }
+
+            if (startcolumn == destcolumn 
+             && startrow    == destrow)
+                oneTimeChecking = 1;
 
             mouse.lastMouseX = mouse.newMouseX;
             mouse.lastMouseY = mouse.newMouseY;
@@ -116,11 +138,21 @@ int main(int argsc, char* argv[])
             {
                 if(CheckCheckmate(field))
                 {
-                isPlaying = 0;
+                    if(CheckCheckmate(field) == 1)
+                        window.message = 3;
+                        //printf("Checkmate!\n");
+                    else
+                        window.message = 1;
+                        //printf("Stalemate!\n");
                 }
                 else
-                {
-                    printf("Check!\n");
+                { 
+                    // If active player is black then load W_Check
+                    if (activePlayer == 0)
+                        window.message = 3;
+                    else
+                        window.message = 2;
+                    //printf("Check!\n");
                 }
             }
             // Toggle active player

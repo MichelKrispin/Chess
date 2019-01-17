@@ -1,4 +1,4 @@
-#include "SDL2/SDL.h"
+#include "SDL.h"
 
 Figure CreateFigureAt(char type[2], const char* imagePath, SDL_Renderer* renderer)
 {

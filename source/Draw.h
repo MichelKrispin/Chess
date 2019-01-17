@@ -1,3 +1,6 @@
+#pragma once
+#include "DrawCircle.h"
+
 void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
                                 int* xPixel, int* yPixel)
 {
@@ -150,8 +153,17 @@ int Draw(unsigned int field[8][8][2],
         SDL_RenderCopy(sdlWindow->renderer, sdlWindow->background, NULL, &tempPos);
     }
 
+    // Draw text message if there is any
+    DrawTextfield(sdlWindow);
+
+    // Draw circle after clicking if it is set
+    if (sdlWindow->circle.isSet)
+    {
+        DrawCircle(sdlWindow);
+    }
+
+
     // Draw white or black queen depending on activePlayer
-    // TODO:
     {
         // Render background
         SDL_Rect tempPos;
