@@ -1,4 +1,8 @@
+#ifndef STRUCTDEFINITIONS_H
+#define STRUCTDEFINITIONS_H
+
 #include "SDL.h"
+
 
 typedef struct PositionCircle
 {
@@ -38,3 +42,6 @@ typedef struct MousePosition
     int newMouseX;
     int newMouseY;
 } MousePosition;
+
+
+#endif

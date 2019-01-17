@@ -10,10 +10,23 @@ else()
     find_package(SDL2 REQUIRED)
 endif()
 
-set(SOURCE ./source/Main.c)
+set(SOURCE ./source/Main.c
+           ./source/CheckBlocked.c
+           ./source/CheckChecked.c
+           ./source/CheckCheckmate.c
+           ./source/CheckLogic.c
+           ./source/CheckMove.c
+           ./source/Draw.c
+           ./source/DrawCircle.c
+           ./source/DrawTextfield.c
+           ./source/Figures.c
+           ./source/Initialize.c
+           ./source/InitializeSDL.c
+           ./source/Move.c
+           ./source/CheckMove.c)
 
 
-add_executable(Chess ./source/Main.c)
+add_executable(Chess ${SOURCE})
 
 message(${SDL2_LIBRARIES})
 

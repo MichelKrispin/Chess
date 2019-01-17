@@ -18,7 +18,7 @@
 #include "CheckLogic.h"
 #include "CheckCheckmate.h"
 
-#ifdef main
+#ifdef main // Used for SDL on windows
 # undef main
 #endif /* main */
 
