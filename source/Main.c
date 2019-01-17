@@ -134,11 +134,11 @@ int main(int argsc, char* argv[])
                 }
                 else
                 { 
-                    // If active player is black then load B_Check
+                    // If active player is black then load W_Check
                     if (activePlayer == 0)
-                        window.message = 2;
-                    else
                         window.message = 3;
+                    else
+                        window.message = 2;
                     //printf("Check!\n");
                 }
             }
