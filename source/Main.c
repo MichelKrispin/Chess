@@ -10,6 +10,7 @@
 #include "InitializeSDL.h"
 #include "DrawTextfield.h"
 #include "Draw.h"
+#include "DrawCircle.h"
 #include "Move.h"
 #include "CheckMove.h"
 #include "CheckBlocked.h"
@@ -91,18 +92,30 @@ int main(int argsc, char* argv[])
          || mouse.lastMouseY != mouse.newMouseY)
         {
             if (clickIndex == 0 || clickIndex == -1)
+            {
                 TransformPixelToRowColumn(
                         mouse.newMouseX,
                         &startcolumn,
                         mouse.newMouseY,
                         &startrow);
+                window.circle.isSet = 1;
+                window.circle.row = startrow;
+                window.circle.column = startcolumn;
+            }
 
             else if (clickIndex == 1)
+            {
                 TransformPixelToRowColumn(
                         mouse.newMouseX,
                         &destcolumn,
                         mouse.newMouseY,
                         &destrow);
+                window.circle.isSet = 0;
+            }
+
+            if (startcolumn == destcolumn 
+             && startrow    == destrow)
+                oneTimeChecking = 1;
 
             mouse.lastMouseX = mouse.newMouseX;
             mouse.lastMouseY = mouse.newMouseY;
