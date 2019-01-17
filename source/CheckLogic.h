@@ -1,11 +1,11 @@
-void ResetMove(unsigned int temppiece,
-               unsigned int destrow, unsigned int destcolumn, 
-               unsigned int startrow, unsigned int startcolumn, 
-               unsigned int field[][8][2])
+void MoveBack(unsigned int temppiece,
+              unsigned int destrow, unsigned int destcolumn,
+              unsigned int startrow, unsigned int startcolumn,  
+              unsigned int field[][8][2])
 {
     Move(destrow, destcolumn, startrow, startcolumn, field);
     field[destrow][destcolumn][0] = temppiece;
-    field[destrow][destcolumn][1] = field[destrow][destcolumn][1] ? 0 : 1;    
+    field[destrow][destcolumn][1] = field[destrow][destcolumn][1] ? 0 : 1;
 }
 
 // Check whether the move is valid
@@ -18,17 +18,17 @@ int CheckLogic(char activePlayer,
     if(!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
         return 0;
     // moves the piece and checks afterwards if your king is still in check (moves the piece back if so)
-    unsigned int temppiece = field[destrow][destcolumn][0];
+    unsigned int temppiece = field[startrow][startcolumn][0];
     Move(startrow, startcolumn, destrow, destcolumn, field);
     // white players turn
     if((activePlayer && CheckChecked(field) == 1)
       // black players turn
       || (!activePlayer && CheckChecked(field) == -1))
     {
-        ResetMove(temppiece, destrow, destcolumn, startrow, startcolumn, field);
+        MoveBack(temppiece, destrow, destcolumn, startrow, startcolumn, field);
         return 0;
     } 
-    ResetMove(temppiece, destrow, destcolumn, startrow, startcolumn, field);
+    MoveBack(temppiece, destrow, destcolumn, startrow, startcolumn, field);
     return 1;
 }
 
