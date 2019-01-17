@@ -73,7 +73,7 @@ int main(int argsc, char* argv[])
             if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field) && window.message != 1)
             {
                 //printf("Invalid move\n");
-                window.message = 2;
+                window.message = 1;
                 isMovable = 0;
             }
         }
@@ -129,12 +129,16 @@ int main(int argsc, char* argv[])
                         window.message = 3;
                         //printf("Checkmate!\n");
                     else
-                        window.message = 4;
+                        window.message = 1;
                         //printf("Stalemate!\n");
                 }
                 else
                 { 
-                    window.message = 5;
+                    // If active player is black then load B_Check
+                    if (activePlayer == 0)
+                        window.message = 2;
+                    else
+                        window.message = 3;
                     //printf("Check!\n");
                 }
             }

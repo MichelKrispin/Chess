@@ -8,29 +8,19 @@ void DrawTextfield(Window* sdlWindow)
     {
         // Can't move
         case 1:
-            strcpy(ShowMessage, "media/1_Cantmove.bmp");
+            strcpy(ShowMessage, "media/1_XSymbol.bmp");
             break;
 
         // Invalid move
         case 2:
-            strcpy(ShowMessage, "media/2_Invalidmove.bmp");
+            strcpy(ShowMessage, "media/2_B_Check.bmp");
             break;
 
         // Checkmate
         case 3:
-            strcpy(ShowMessage, "media/3_Checkmate.bmp");
+            strcpy(ShowMessage, "media/3_W_Check.bmp");
             break;
             
-        // Stalemate
-        case 4:
-            strcpy(ShowMessage, "media/4_Stalemate.bmp");
-            break;
-
-        // Check
-        case 5:
-            strcpy(ShowMessage, "media/5_Check.bmp");
-            break;
-
         default:
             break;
     }
@@ -44,7 +34,7 @@ void DrawTextfield(Window* sdlWindow)
     SDL_Rect TextfieldRect;
     TextfieldRect.x = 50;
     TextfieldRect.y = 650;
-    TextfieldRect.w = 350;
+    TextfieldRect.w = 100;
     TextfieldRect.h = 100;
 
 
