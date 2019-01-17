@@ -65,22 +65,25 @@ int main(int argsc, char* argv[])
             isMovable = 1;
             if (!CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             {
-                strcpy(window.Message, "Can't move this way!");
+                window.message = 1;
                 //printf("Can't move this way\n");
                 isMovable = 0;
             }
             // Check if logic is valid on this move
-            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field) && window.message != 1)
             {
-                strcpy(window.Message, "Invalid move!");
                 //printf("Invalid move\n");
+                window.message = 2;
                 isMovable = 0;
             }
         }
 
-        // Reset oneTimeChecking
+        // Reset oneTimeChecking and message
         if (clickIndex == 1)
+        {
             oneTimeChecking = 0;
+            window.message = 0;
+        }
         
         // Check if last mouse is different from new mouse
         // If so transform to row and column space
@@ -123,15 +126,15 @@ int main(int argsc, char* argv[])
                 if(CheckCheckmate(field))
                 {
                     if(CheckCheckmate(field) == 1)
-                        strcpy(window.Message, "Checkmate");
+                        window.message = 3;
                         //printf("Checkmate!\n");
                     else
-                        strcpy(window.Message, "Stalemate");
+                        window.message = 4;
                         //printf("Stalemate!\n");
                 }
                 else
                 { 
-                    strcpy(window.Message, "Check!");
+                    window.message = 5;
                     //printf("Check!\n");
                 }
             }

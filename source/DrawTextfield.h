@@ -1,13 +1,41 @@
 #include "SDL.h"
-#include "SDL_ttf.h"
 
+// message value is used for loading specified image
 void DrawTextfield(Window* sdlWindow)
 {
-    TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+    char ShowMessage[50];
+    switch (sdlWindow->message)
+    {
+        // Can't move
+        case 1:
+            strcpy(ShowMessage, "media/1_Cantmove.bmp");
+            break;
 
-    SDL_Color White = {0, 0, 0};
+        // Invalid move
+        case 2:
+            strcpy(ShowMessage, "media/2_Invalidmove.bmp");
+            break;
 
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, sdlWindow->Message, White); 
+        // Checkmate
+        case 3:
+            strcpy(ShowMessage, "media/3_Checkmate.bmp");
+            break;
+            
+        // Stalemate
+        case 4:
+            strcpy(ShowMessage, "media/4_Stalemate.bmp");
+            break;
+
+        // Check
+        case 5:
+            strcpy(ShowMessage, "media/5_Check.bmp");
+            break;
+
+        default:
+            break;
+    }
+
+    SDL_Surface* surfaceMessage = SDL_LoadBMP(ShowMessage); 
 
     SDL_Texture* Message = SDL_CreateTextureFromSurface(sdlWindow->renderer, surfaceMessage);
 
@@ -16,7 +44,7 @@ void DrawTextfield(Window* sdlWindow)
     SDL_Rect TextfieldRect;
     TextfieldRect.x = 50;
     TextfieldRect.y = 650;
-    TextfieldRect.w = 400;
+    TextfieldRect.w = 350;
     TextfieldRect.h = 100;
 
 
