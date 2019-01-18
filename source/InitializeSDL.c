@@ -1,11 +1,16 @@
 #include "InitializeSDL.h"
 #include "SDL.h"
+#include "PlaySound.h"
+#include "Figures.h"
+#include <stdio.h>
 
 
 int InitializeSDL(Window* sdlWindow)
 {
     
-    SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+    // Initialize SDL2 -> Video and Audio
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+        printf("Unable to initialize SDL: %s\n", SDL_GetError());
     
     // Create an application window with the following settings:
     sdlWindow->window = SDL_CreateWindow(
@@ -41,6 +46,10 @@ int InitializeSDL(Window* sdlWindow)
     sdlWindow->blackQueen = SDL_CreateTextureFromSurface(
             sdlWindow->renderer, bQueen);
     SDL_FreeSurface(bQueen);
+
+
+    // After intializing all image data init sound
+    LoadAudio(sdlWindow);
    
     return 0;
 }

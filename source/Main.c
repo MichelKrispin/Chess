@@ -6,6 +6,7 @@
 
 #include "StructDefinitions.h"
 #include "Initialize.h"
+#include "PlaySound.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
 #include "DrawTextfield.h"
@@ -19,7 +20,7 @@
 #include "CheckCheckmate.h"
 
 #ifdef main // Used for SDL on windows
-# undef main
+#undef main
 #endif /* main */
 
 int main(int argsc, char* argv[])
@@ -132,6 +133,8 @@ int main(int argsc, char* argv[])
         if (clickIndex == 0 && isMovable == 1)
         {
             Move(startrow, startcolumn, destrow, destcolumn, field);
+            // If any figure is moved play the sound
+            PlaySound(&window);
 
             // Check if check or checkmate
             if (CheckChecked(field))
@@ -173,7 +176,7 @@ int main(int argsc, char* argv[])
 
     }
 
-    // TODO: Cleanup
+    // TODO: Cleanup all figures surfaces closeaudiodevice and freewav
     CleanupSDL(&window, figures, 32);
     return 0;
 }

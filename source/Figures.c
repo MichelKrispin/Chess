@@ -1,4 +1,5 @@
 #include "Figures.h"
+#include <stdio.h>
 
 Figure CreateFigureAt(char type[2], const char* imagePath, SDL_Renderer* renderer)
 {
@@ -6,6 +7,9 @@ Figure CreateFigureAt(char type[2], const char* imagePath, SDL_Renderer* rendere
     // Create figure
     figure.image = SDL_LoadBMP(imagePath);
     figure.texture = SDL_CreateTextureFromSurface(renderer, figure.image);
+    // Check for an error -> strcmp returns 0 if strings are equal
+    if (strcmp("", SDL_GetError()) != 0)
+        printf("Error in createFigure: %s\n", SDL_GetError());
 
     figure.imageInfo.x = 0;
     figure.imageInfo.y = 0;

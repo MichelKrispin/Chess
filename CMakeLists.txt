@@ -23,6 +23,7 @@ set(SOURCE ./source/Main.c
            ./source/Initialize.c
            ./source/InitializeSDL.c
            ./source/Move.c
+           ./source/PlaySound.c
            ./source/CheckMove.c)
 
 

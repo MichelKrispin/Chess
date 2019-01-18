@@ -20,8 +20,19 @@ typedef struct Window
     SDL_Texture* background;
     SDL_Texture* whiteQueen;
     SDL_Texture* blackQueen;
+
+    // Used to show specific symbol
     char message;
+
+    // Used to show circle below clicked figure
     PositionCircle circle;
+    
+    // Used to save audio data
+    SDL_AudioSpec spec;
+    SDL_AudioDeviceID audioDevice;
+    unsigned int audioLength;
+    unsigned char* audioBuffer;
+
 } Window;
 
 typedef struct Figure
