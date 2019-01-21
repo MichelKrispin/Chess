@@ -23,6 +23,7 @@ void DrawTextfield(Window* sdlWindow)
             break;
             
         default:
+            return;
             break;
     }
 

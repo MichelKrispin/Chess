@@ -11,7 +11,6 @@ typedef struct PositionCircle
     char isSet;
 } PositionCircle;
 
-
 typedef struct Window
 {
     SDL_Window* window;
