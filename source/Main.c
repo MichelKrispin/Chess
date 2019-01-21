@@ -18,6 +18,7 @@
 #include "CheckChecked.h"
 #include "CheckLogic.h"
 #include "CheckCheckmate.h"
+#include "ShowMessageBox.h"
 
 #ifdef main // Used for SDL on windows
 #undef main
@@ -55,6 +56,8 @@ int main(int argsc, char* argv[])
     char oneTimeChecking = 0;
     // Bool for isMovable
     char isMovable = 0;
+    // Bool for checkmate
+    char checkMate = 0;
     
     Draw(field, &window, figures, &mouse, &activePlayer);
 
@@ -139,13 +142,12 @@ int main(int argsc, char* argv[])
             // Check if check or checkmate
             if (CheckChecked(field))
             {
-                int checked = CheckCheckmate(activePlayer, field);
-                if(checked)
+                checkMate = CheckCheckmate(activePlayer, field);
+                if(checkMate)
                 {
-                    if(checked == 1)
+                    if(checkMate == 1)
                     {
                         // CHECKMATE
-                        // TODO: Create popup window
                         if (activePlayer == 0)
                             window.message = 3;
                         else
@@ -178,6 +180,20 @@ int main(int argsc, char* argv[])
                          &mouse,
                          &activePlayer);
         
+        // If checkMate is true show message box
+        if (checkMate)
+        {
+            int button = ShowMessageBox();
+            if (button == 0)
+            {
+               InitializeField(field); 
+               activePlayer = 1;
+               checkMate = 0;
+               window.message = 0;
+            }
+            if (button == 1)
+                isPlaying = 0;
+        }
         
         // Prints Error for debug purposes
         //printf("%s\n", SDL_GetError());

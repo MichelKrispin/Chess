@@ -24,6 +24,7 @@ set(SOURCE ./source/Main.c
            ./source/InitializeSDL.c
            ./source/Move.c
            ./source/PlaySound.c
+           ./source/ShowMessageBox.c
            ./source/CheckMove.c)
 
 
