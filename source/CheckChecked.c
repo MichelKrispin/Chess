@@ -3,23 +3,19 @@
 #include "CheckBlocked.h"
 
 // finds one king and returns the position as row and column
-void FindKing(unsigned int *kingrow, unsigned int *kingcolumn, unsigned int field[][8][2])
+int FindKing(unsigned int *kingrow, unsigned int *kingcolumn, unsigned int field[][8][2])
 {
     // loop for every fieldposition
-    char kingfound = 0;
     for(; *kingrow < 8; (*kingrow)++)
     {
         for(; *kingcolumn < 8; (*kingcolumn)++)
         {
             if(field[*kingrow][*kingcolumn][0] == 6)
             {
-                kingfound = 1;
-                break;
+                return 1;
             }
-            // for second found king
+        // for second found king
         }
-        if(kingfound)
-            break;
         *kingcolumn = 0;
     }
 }
@@ -42,7 +38,7 @@ int CheckChecked(unsigned int field[][8][2])
                 if(CheckMove(field[startrow][startcolumn][1], startrow, startcolumn, kingrow, kingcolumn, field)
                   && CheckBlocked(field[startrow][startcolumn][1], startrow, startcolumn, kingrow, kingcolumn, field))
                 {
-                    // returns the color of the player that's in check (-1 black, 1 = white)
+                    // returns the color of the player that's in check (-1 = black, 1 = white)
                     return field[startrow][startcolumn][1] ? -1 : 1;
                 }
             }
@@ -59,4 +55,3 @@ int CheckChecked(unsigned int field[][8][2])
     // if no king is in check
     return 0;
 }
-

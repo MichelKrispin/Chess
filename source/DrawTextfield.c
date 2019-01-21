@@ -7,17 +7,17 @@ void DrawTextfield(Window* sdlWindow)
     char ShowMessage[50];
     switch (sdlWindow->message)
     {
-        // Can't move
+        // Invalid move
         case 1:
             strcpy(ShowMessage, "media/1_XSymbol.bmp");
             break;
 
-        // Invalid move
+        // Check black
         case 2:
             strcpy(ShowMessage, "media/2_B_Check.bmp");
             break;
 
-        // Checkmate
+        // Check white
         case 3:
             strcpy(ShowMessage, "media/3_W_Check.bmp");
             break;

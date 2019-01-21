@@ -1,13 +1,15 @@
 #include "CheckMove.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 // Check whether the move is valid
-int CheckMove(char activePLayer, 
+int CheckMove(char activePlayer, 
               unsigned int startrow, unsigned int startcolumn, 
               unsigned int destrow, unsigned int destcolumn, 
               unsigned int field[][8][2])
 {
-    if(field[startrow][startcolumn][1] == (unsigned int) activePLayer)
+    if(field[startrow][startcolumn][1] == (unsigned int) activePlayer
+      && (destrow != startrow || destcolumn != startcolumn))
     {
         switch(field[startrow][startcolumn][0])
         {  
@@ -17,7 +19,7 @@ int CheckMove(char activePLayer,
                 if(destcolumn == startcolumn)
                 {
                     // move direction decided by activePlayer
-                    if(activePLayer)
+                    if(activePlayer)
                     {
                         if((destrow == startrow - 1) || 
                           ((startrow == 6) && (destrow == 4)))
@@ -32,15 +34,15 @@ int CheckMove(char activePLayer,
                 }
                 // taking a piece (diagonal)
                 else if(field[destrow][destcolumn][0] && 
-                        field[destrow][destcolumn][1] != (unsigned int)activePLayer)
+                        field[destrow][destcolumn][1] != (unsigned int)activePlayer)
                 {
                     if((destcolumn - startcolumn == 1) || 
                       (startcolumn - destcolumn == 1))
                     {
                         // move direction
-                        if(activePLayer && (destrow == startrow - 1))
+                        if(activePlayer && (destrow == startrow - 1))
                             return 1;
-                        else if(!activePLayer && (destrow == startrow + 1))
+                        else if(!activePlayer && (destrow == startrow + 1))
                             return 1;
                     }
                 }
@@ -86,5 +88,4 @@ int CheckMove(char activePLayer,
     }
     return 0;
 }
-
 

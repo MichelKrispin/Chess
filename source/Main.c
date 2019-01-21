@@ -139,10 +139,18 @@ int main(int argsc, char* argv[])
             // Check if check or checkmate
             if (CheckChecked(field))
             {
-                if(CheckCheckmate(field))
+                int checked = CheckCheckmate(activePlayer, field);
+                if(checked)
                 {
-                    if(CheckCheckmate(field) == 1)
-                        window.message = 3;
+                    if(checked == 1)
+                    {
+                        // CHECKMATE
+                        // TODO: Create popup window
+                        if (activePlayer == 0)
+                            window.message = 3;
+                        else
+                            window.message = 2;
+                    }
                         //printf("Checkmate!\n");
                     else
                         window.message = 1;

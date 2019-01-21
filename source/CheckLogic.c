@@ -1,16 +1,18 @@
 #include "CheckLogic.h"
-#include "CheckChecked.h"
 #include "CheckBlocked.h"
 #include "Move.h"
+#include "CheckChecked.h"
 
-void MoveBack(unsigned int temppiece,
-              unsigned int destrow, unsigned int destcolumn,
-              unsigned int startrow, unsigned int startcolumn,  
-              unsigned int field[][8][2])
+void CopyField(unsigned int field[][8][2], unsigned int controlfield[][8][2])
 {
-    Move(destrow, destcolumn, startrow, startcolumn, field);
-    field[destrow][destcolumn][0] = temppiece;
-    field[destrow][destcolumn][1] = field[destrow][destcolumn][1] ? 0 : 1;
+    for(unsigned int rowcount = 0; rowcount < 8; rowcount++)
+    {
+        for(unsigned int columnc = 0; columnc < 8; columnc++)
+        {
+            controlfield[rowcount][columnc][0] = field[rowcount][columnc][0];
+            controlfield[rowcount][columnc][1] = field[rowcount][columnc][1];
+        }
+    }
 }
 
 // Check whether the move is valid
@@ -20,21 +22,22 @@ int CheckLogic(char activePlayer,
                unsigned int destrow, unsigned int destcolumn, 
                unsigned int field[][8][2])
 {
-    if(!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
-        return 0;
-    // moves the piece and checks afterwards if your king is still in check (moves the piece back if so)
-    unsigned int temppiece = field[startrow][startcolumn][0];
-    Move(startrow, startcolumn, destrow, destcolumn, field);
-    // white players turn
-    if((activePlayer && CheckChecked(field) == 1)
-      // black players turn
-      || (!activePlayer && CheckChecked(field) == -1))
+    if (field[startrow][startcolumn][1] == (unsigned int)activePlayer)
     {
-        MoveBack(temppiece, destrow, destcolumn, startrow, startcolumn, field);
-        return 0;
-    } 
-    MoveBack(temppiece, destrow, destcolumn, startrow, startcolumn, field);
+        if (!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+            return 0;
+        // moves the piece and checks afterwards if your king is still in check (moves the piece back if so)
+        unsigned int controlfield[8][8][2];
+        CopyField(field, controlfield);
+        Move(startrow, startcolumn, destrow, destcolumn, controlfield);
+        // white players turn
+        if ((activePlayer && CheckChecked(controlfield) == 1)
+            // black players turn
+            || (!activePlayer && CheckChecked(controlfield) == -1))
+        {
+            return 0;
+        }
+    }
     return 1;
 }
-
 
