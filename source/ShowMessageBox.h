@@ -2,5 +2,6 @@
 #define SHOWMESSAGEBOX_H
 
 int ShowMessageBox();
+int ShowSwapMessageBox();
 
 #endif
