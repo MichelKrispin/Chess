@@ -60,12 +60,23 @@ void CleanupSDL(
         Figure* figures,
         int count)
 {
-    count = figures[0].imageInfo.x;
-
     // Clear the memory of all figures
     ClearFigureMemory(count, figures);
     
+    // Clear all audio data
+    SDL_CloseAudioDevice(sdlWindow->audioDevice);
+
     // Close and destroy the window
+    if (sdlWindow->circle.texture != NULL)
+        SDL_DestroyTexture(sdlWindow->circle.texture);
+
+    if (sdlWindow->messageImages.xSymbol != NULL)
+        SDL_DestroyTexture(sdlWindow->messageImages.xSymbol);
+    if (sdlWindow->messageImages.bCheck != NULL)
+        SDL_DestroyTexture(sdlWindow->messageImages.bCheck);
+    if (sdlWindow->messageImages.wCheck != NULL)
+        SDL_DestroyTexture(sdlWindow->messageImages.wCheck);
+
     SDL_DestroyTexture(sdlWindow->background);
     SDL_FreeSurface(sdlWindow->chessField);
     SDL_DestroyRenderer(sdlWindow->renderer);
