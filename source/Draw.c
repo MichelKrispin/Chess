@@ -112,7 +112,8 @@ int Draw(unsigned int field[8][8][2],
          Window* sdlWindow,
          Figure* figures,
          MousePosition* mouse,
-         char* activePlayer)
+         char* activePlayer,
+         SpecialMoveSet *specialMoveSet)
 {
     SDL_Event event;
 
@@ -138,7 +139,7 @@ int Draw(unsigned int field[8][8][2],
             // Reset game
             if (event.key.keysym.sym == SDLK_r)
             {
-               InitializeField(field); 
+               InitializeField(field, specialMoveSet); 
                *activePlayer = 1;
                return 1;
             }

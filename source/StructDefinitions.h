@@ -3,7 +3,6 @@
 
 #include "SDL.h"
 
-
 typedef struct PositionCircle
 {
     unsigned int row;
@@ -53,5 +52,16 @@ typedef struct MousePosition
     int newMouseY;
 } MousePosition;
 
+typedef struct SpecialMoveSet
+{
+    // for movechecks (to 1 when piece moved at least once)
+    char bLeftRook;  // black left (white players viewpoint)
+    char bRightRook; // black right
+    char wLeftRook;  // white left
+    char wRightRook; // white right
+    char blackKing;
+    char whiteKing;
+    char enPassente; // pawns
+} SpecialMoveSet;
 
 #endif

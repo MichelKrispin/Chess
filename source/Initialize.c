@@ -1,6 +1,6 @@
 #include "Initialize.h"
 
-void InitializeField(unsigned int field[][8][2])
+void InitializeField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
 {
     // Set all array elements to be either 0 as empty
     // Or numbers for different figure
@@ -41,5 +41,13 @@ void InitializeField(unsigned int field[][8][2])
                 field[rowcount][columnc][1] = 0;                // schwarz Farbe
         }
     }
- 
+
+    // moved bools set to 0 and changed to 1 when piece moved once
+    specialMoveSet->bLeftRook = 0; 
+    specialMoveSet->bRightRook = 0; 
+    specialMoveSet->wLeftRook = 0; 
+    specialMoveSet->wRightRook = 0;
+    specialMoveSet->blackKing = 0;
+    specialMoveSet->whiteKing = 0;
+    specialMoveSet->enPassente = 0; 
 }

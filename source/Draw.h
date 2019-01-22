@@ -17,6 +17,7 @@ int Draw(unsigned int field[8][8][2],
          Window* sdlWindow,
          Figure* figures,
          MousePosition* mouse,
-         char* activePlayer);
+         char* activePlayer,
+         SpecialMoveSet *specialMoveSet);
 
 #endif

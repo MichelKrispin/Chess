@@ -76,8 +76,8 @@ int CheckMove(char activePlayer,
             // King
             case 6:
                 // move : 1 in any direction
-                if(abs((int)destrow - (int)startrow) < 2 && 
-                  abs((int)destcolumn - (int)startcolumn) < 2)
+                if((abs((int)destrow - (int)startrow) < 2 
+                  && abs((int)destcolumn - (int)startcolumn) < 2))
                     return 1;
                 break;
             // no selected

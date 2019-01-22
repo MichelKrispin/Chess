@@ -26,40 +26,25 @@
 
 int main(int argsc, char* argv[])
 {
-    // Initialize array to 0
-    unsigned int field[8][8][2];                          
+    // outsourced variable initialization
+    #include "Variables.h"
+
     memset(field, 0, sizeof(field)); 
 
-    // Initialize field array with data
-    InitializeField(field);
+    // Bools for moved at least once (enPassente and castling)
+    SpecialMoveSet specialMoveSet;
+
+    // Initialize field array with data    
+    InitializeField(field, &specialMoveSet);
 
     // Initialize SDL
     Window window;
     InitializeSDL(&window);
 
-    // For the MousePosition
-    MousePosition mouse = {0, 0, 0, 0};
-    char clickIndex = -1; // If 0 first click 1 second click
-  
     Figure figures[32];
     InitializeFigures(figures, &window);
-
-    // Intial rows and columns
-    unsigned int startrow = 0, startcolumn = 0;
-    unsigned int destrow = 0, destcolumn = 0;
-
-    // Bool saying whether game is still playing
-    char isPlaying = 1;
-    // Bool indicating the active player (White=1, Black=0)
-    char activePlayer = 1;
-    // Bool for checking only once
-    char oneTimeChecking = 0;
-    // Bool for isMovable
-    char isMovable = 0;
-    // Bool for checkmate
-    char checkMate = 0;
     
-    Draw(field, &window, figures, &mouse, &activePlayer);
+    Draw(field, &window, figures, &mouse, &activePlayer, &specialMoveSet);
 
     while (isPlaying)
     {
@@ -178,7 +163,8 @@ int main(int argsc, char* argv[])
                          &window,
                          figures,
                          &mouse,
-                         &activePlayer);
+                         &activePlayer,
+                         &specialMoveSet);
         
         // If checkMate is true show message box
         if (checkMate)
@@ -186,7 +172,7 @@ int main(int argsc, char* argv[])
             int button = ShowMessageBox();
             if (button == 0)
             {
-               InitializeField(field); 
+               InitializeField(field, &specialMoveSet); 
                activePlayer = 1;
                checkMate = 0;
                window.message = 0;
