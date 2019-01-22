@@ -15,7 +15,7 @@ void TransformPixelToRowColumn(
 
 int Draw(unsigned int field[8][8][2],
          Window* sdlWindow,
-         Figure* figures,
+         Figures* figures,
          MousePosition* mouse,
          char* activePlayer);
 

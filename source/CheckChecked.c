@@ -18,6 +18,7 @@ int FindKing(unsigned int *kingrow, unsigned int *kingcolumn, unsigned int field
         }
         *kingcolumn = 0;
     }
+    return 0;
 }
 
 // checks whether any king is in check

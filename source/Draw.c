@@ -66,7 +66,6 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
     }
 }
 
-
 void TransformPixelToRowColumn(
         int  pixelInputX,
         unsigned int* columnOutput,
@@ -110,7 +109,7 @@ void TransformPixelToRowColumn(
 
 int Draw(unsigned int field[8][8][2],
          Window* sdlWindow,
-         Figure* figures,
+         Figures* figures,
          MousePosition* mouse,
          char* activePlayer)
 {
@@ -182,9 +181,9 @@ int Draw(unsigned int field[8][8][2],
     }
 
     // Set all isSet flags of all figures to 0
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < figures->count; i++)
     {
-        figures[i].isSet = 0;
+        figures->figures[i].isSet = 0;
     }
     
     // Zeilenschleife
@@ -214,10 +213,10 @@ int Draw(unsigned int field[8][8][2],
 
                         for (int i = player; i < player + 8; i++)
                         {
-                            if (figures[i].isSet == 0)
+                            if (figures->figures[i].isSet == 0)
                             {
-                                SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
-                                figures[i].isSet = 1;
+                                SDL_RenderCopy(sdlWindow->renderer, figures->figures[i].texture, NULL, &destinationPosition);
+                                figures->figures[i].isSet = 1;
                                 break;
                             }
                         }
@@ -225,19 +224,26 @@ int Draw(unsigned int field[8][8][2],
                     }
 
                 // Rooks (Tower)
+                // Searches first for br/wr in figures and then for isSet flag
                 case 2: 
                     {
-                        int player = 24;
+                        // Search for br tag if black -> white otherwise
+                        char searchFor[2] = {'b','r'};
                         if (field[rowcount][columnc][1] == 1)
-                            player -= 16;
+                            searchFor[0] = 'w';
 
-                        for (int i = player; i < player + 2; i++)
+                        // Search each figure if it the type matches
+                        for (int i = 0; i < figures->count; i++)
                         {
-                            if (figures[i].isSet == 0)
+                            if (figures->figures[i].type[0] == searchFor[0]
+                             && figures->figures[i].type[1] == searchFor[1])
                             {
-                                SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
-                                figures[i].isSet = 1;
-                                break;
+                                if (figures->figures[i].isSet == 0)
+                                {
+                                    SDL_RenderCopy(sdlWindow->renderer, figures->figures[i].texture, NULL, &destinationPosition);
+                                    figures->figures[i].isSet = 1;
+                                    break;
+                                }
                             }
                         }
                         break;
@@ -246,17 +252,22 @@ int Draw(unsigned int field[8][8][2],
                 // Knights
                 case 3: 
                     {
-                        int player = 26;
+                        char searchFor[2] = {'b','n'};
                         if (field[rowcount][columnc][1] == 1)
-                            player -= 16;
+                            searchFor[0] = 'w';
 
-                        for (int i = player; i < player + 2; i++)
+                        // Search each figure if it the type matches
+                        for (int i = 0; i < figures->count; i++)
                         {
-                            if (figures[i].isSet == 0)
+                            if (figures->figures[i].type[0] == searchFor[0]
+                             && figures->figures[i].type[1] == searchFor[1])
                             {
-                                SDL_RenderCopy(sdlWindow->renderer, figures[i].texture, NULL, &destinationPosition);
-                                figures[i].isSet = 1;
-                                break;
+                                if (figures->figures[i].isSet == 0)
+                                {
+                                    SDL_RenderCopy(sdlWindow->renderer, figures->figures[i].texture, NULL, &destinationPosition);
+                                    figures->figures[i].isSet = 1;
+                                    break;
+                                }
                             }
                         }
                         break;
@@ -265,17 +276,22 @@ int Draw(unsigned int field[8][8][2],
                 // Bishops
                 case 4: 
                      {
-                        int player = 28;
+                        char searchFor[2] = {'b','b'};
                         if (field[rowcount][columnc][1] == 1)
-                            player -= 16;
+                            searchFor[0] = 'w';
 
-                        for (int i = player; i < player + 2; i++)
+                        // Search each figure if it the type matches
+                        for (int i = 0; i < figures->count; i++)
                         {
-                            if (figures[i].isSet == 0)
+                            if (figures->figures[i].type[0] == searchFor[0]
+                             && figures->figures[i].type[1] == searchFor[1])
                             {
-                                SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
-                                figures[i].isSet = 1;
-                                break;
+                                if (figures->figures[i].isSet == 0)
+                                {
+                                    SDL_RenderCopy(sdlWindow->renderer, figures->figures[i].texture, NULL, &destinationPosition);
+                                    figures->figures[i].isSet = 1;
+                                    break;
+                                }
                             }
                         }
                         break;
@@ -284,15 +300,23 @@ int Draw(unsigned int field[8][8][2],
                 // Queens
                 case 5: 
                     {
-                        int player = 30;
+                        char searchFor[2] = {'b','q'};
                         if (field[rowcount][columnc][1] == 1)
-                            player -= 16;
+                            searchFor[0] = 'w';
 
-                        if (figures[player].isSet == 0)
+                        // Search each figure if it the type matches
+                        for (int i = 0; i < figures->count; i++)
                         {
-                            SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
-                            figures[player].isSet = 1;
-                            break;
+                            if (figures->figures[i].type[0] == searchFor[0]
+                             && figures->figures[i].type[1] == searchFor[1])
+                            {
+                                if (figures->figures[i].isSet == 0)
+                                {
+                                    SDL_RenderCopy(sdlWindow->renderer, figures->figures[i].texture, NULL, &destinationPosition);
+                                    figures->figures[i].isSet = 1;
+                                    break;
+                                }
+                            }
                         }
                         break;
                      }                   
@@ -304,10 +328,10 @@ int Draw(unsigned int field[8][8][2],
                         if (field[rowcount][columnc][1] == 1)
                             player -= 16;
 
-                        if (figures[player].isSet == 0)
+                        if (figures->figures[player].isSet == 0)
                         {
-                            SDL_RenderCopy(sdlWindow->renderer, figures[player].texture, NULL, &destinationPosition);
-                            figures[player].isSet = 1;
+                            SDL_RenderCopy(sdlWindow->renderer, figures->figures[player].texture, NULL, &destinationPosition);
+                            figures->figures[player].isSet = 1;
                             break;
                         }
                         break;

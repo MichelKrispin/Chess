@@ -45,6 +45,12 @@ typedef struct Figure
     char isSet;
 } Figure;
 
+typedef struct Figures
+{
+    Figure* figures;
+    int count;
+} Figures;
+
 typedef struct MousePosition
 {
     int lastMouseX;

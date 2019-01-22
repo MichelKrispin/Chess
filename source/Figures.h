@@ -11,7 +11,11 @@ void RenderFigures(int count, Figure* figures, SDL_Renderer* renderer);
 
 
 // Initializes all figures
-void InitializeFigures(Figure* figures, Window* sdlWindow);
+Figure* InitializeFigures(Window* sdlWindow);
+
+// Add one figure to figurelist
+// figureType as i.e. wq for white queen
+Figure* AddFigure(Figures* figures, char* figureType, Window* sdlWindow);
 
 
 void ClearFigureMemory(int count, Figure* figures);

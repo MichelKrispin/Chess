@@ -41,8 +41,9 @@ int main(int argsc, char* argv[])
     MousePosition mouse = {0, 0, 0, 0};
     char clickIndex = -1; // If 0 first click 1 second click
   
-    Figure figures[32];
-    InitializeFigures(figures, &window);
+    Figures figures;
+    figures.count = 32;
+    figures.figures = InitializeFigures(&window);
 
     // Intial rows and columns
     unsigned int startrow = 0, startcolumn = 0;
@@ -59,7 +60,7 @@ int main(int argsc, char* argv[])
     // Bool for checkmate
     char checkMate = 0;
     
-    Draw(field, &window, figures, &mouse, &activePlayer);
+    Draw(field, &window, &figures, &mouse, &activePlayer);
 
     while (isPlaying)
     {
@@ -176,7 +177,7 @@ int main(int argsc, char* argv[])
         // Draw the field
         isPlaying = Draw(field,
                          &window,
-                         figures,
+                         &figures,
                          &mouse,
                          &activePlayer);
         
@@ -201,6 +202,7 @@ int main(int argsc, char* argv[])
     }
 
     // TODO: Cleanup all figures surfaces closeaudiodevice and freewav
-    CleanupSDL(&window, figures, 32);
+    CleanupSDL(&window, figures.figures, figures.count);
+    free(figures.figures);
     return 0;
 }
