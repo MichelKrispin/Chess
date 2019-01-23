@@ -59,13 +59,15 @@ int main(int argsc, char* argv[])
     char isMovable = 0;
     // Bool for checkmate
     char checkMate = 0;
+    // Bool for checking if click was inside field
+    char validClick = 1;
     
     Draw(field, &window, &figures, &mouse, &activePlayer);
 
     while (isPlaying)
     {
         // Check if the move is valid
-        if (clickIndex == 0 && oneTimeChecking == 0)
+        if (clickIndex == 0 && oneTimeChecking == 0 && validClick == 1)
         {
             oneTimeChecking = 1;
             isMovable = 1;
@@ -103,9 +105,18 @@ int main(int argsc, char* argv[])
                         &startcolumn,
                         mouse.newMouseY,
                         &startrow);
-                window.circle.isSet = 1;
-                window.circle.row = startrow;
-                window.circle.column = startcolumn;
+                // Check if click was inside field
+                if (startcolumn == 8 || startrow == 8)
+                    validClick = 0;
+                else
+                    validClick = 1;
+
+                if (validClick)
+                {
+                    window.circle.isSet = 1;
+                    window.circle.row = startrow;
+                    window.circle.column = startcolumn;
+                }
             }
 
             else if (clickIndex == 1)
@@ -115,7 +126,14 @@ int main(int argsc, char* argv[])
                         &destcolumn,
                         mouse.newMouseY,
                         &destrow);
-                window.circle.isSet = 0;
+                // If click wasn't inside field click again
+                if (destcolumn == 8 || destrow == 8)
+                    validClick = 0;
+                else
+                    validClick = 1;
+
+                if (validClick)
+                    window.circle.isSet = 0;
             }
 
             if (startcolumn == destcolumn 
@@ -127,7 +145,7 @@ int main(int argsc, char* argv[])
 
             if (clickIndex == -1)
                 clickIndex = 1;
-            else
+            else if (validClick)
                 clickIndex = clickIndex ? 0 : 1;
         }
         

@@ -54,7 +54,7 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
               *xPixel = 304; 
             break;
         case 5:
-              *xPixel = 372; 
+              *xPixel = 375; 
             break;
         case 6:
               *xPixel = 440; 
@@ -88,6 +88,8 @@ void TransformPixelToRowColumn(
         *columnOutput = 6;
     else if (pixelInputX < 569)
         *columnOutput = 7;
+    else
+        *columnOutput = 8;
     
     if (pixelInputY > 30 && pixelInputY < 95)
         *rowOutput = 0;
@@ -105,6 +107,8 @@ void TransformPixelToRowColumn(
         *rowOutput = 6;
     else if (pixelInputY < 569)
         *rowOutput = 7;
+    else
+        *rowOutput = 8;
 }
 
 int Draw(unsigned int field[8][8][2],
