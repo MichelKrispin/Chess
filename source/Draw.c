@@ -20,13 +20,13 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
               *yPixel = 171; 
             break;
         case 3:
-              *yPixel = 240; 
+              *yPixel = 236; 
             break;
         case 4:
-              *yPixel = 308; 
+              *yPixel = 304; 
             break;
         case 5:
-              *yPixel = 375; 
+              *yPixel = 373; 
             break;
         case 6:
               *yPixel = 442; 
@@ -51,13 +51,13 @@ void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
               *xPixel = 237; 
             break;
         case 4:
-              *xPixel = 308; 
+              *xPixel = 304; 
             break;
         case 5:
-              *xPixel = 375; 
+              *xPixel = 372; 
             break;
         case 6:
-              *xPixel = 442; 
+              *xPixel = 440; 
             break;
         case 7:
               *xPixel = 509; 
