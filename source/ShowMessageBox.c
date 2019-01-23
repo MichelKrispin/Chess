@@ -1,9 +1,10 @@
 #include "ShowMessageBox.h"
 #include "SDL.h"
+#include <string.h>
 
 // Returns 0 for play again
 // Return 1 for exit
-int ShowMessageBox()
+int ShowMessageBox(char* title, char* message)
 {
     const SDL_MessageBoxButtonData buttons[] = {
         { SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 0, "Play again" },
@@ -24,11 +25,18 @@ int ShowMessageBox()
         }
     };
 
+    // Set outputTitle
+    char outputTitle[50];
+    strcpy(outputTitle, title);
+    // Set outputMessage
+    char outputMessage[100];
+    strcpy(outputMessage, message);
+
     const SDL_MessageBoxData messageboxdata = {
         SDL_MESSAGEBOX_INFORMATION, /* .flags */
         NULL, /* .window */
-        "Checkmate!", /* .title */
-        "Game finished. Play again?", /* .message */
+        outputTitle, /* .title */
+        outputMessage, /* .message */
         SDL_arraysize(buttons), /* .numbuttons */
         buttons, /* .buttons */
         &colorScheme /* .colorScheme */

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -202,7 +199,13 @@ int main(int argsc, char* argv[])
         // If checkMate is true show message box
         if (checkMate)
         {
-            int button = ShowMessageBox();
+            char message[100];
+            // If active player is black -> Because it already swapped
+            if (activePlayer == 0)
+                strcpy(message, "White won! Play again?");
+            else
+                strcpy(message, "Black won! Play again?");
+            int button = ShowMessageBox("Checkmate!", message);
             if (button == 0)
             {
                InitializeField(field); 
