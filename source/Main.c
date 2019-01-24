@@ -60,7 +60,7 @@ int main(int argsc, char* argv[])
                 isMovable = 0;
             }
             // Check if logic is valid on this move
-            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field) && window.message != 1)
+            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet) && window.message != 1)
             {
                 //printf("Invalid move\n");
                 window.message = 1;
@@ -120,14 +120,38 @@ int main(int argsc, char* argv[])
         // because two clicks are covered now
         if (clickIndex == 0 && isMovable == 1)
         {
-            Move(startrow, startcolumn, destrow, destcolumn, field);
+            Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
             // If any figure is moved play the sound
             PlaySound(&window);
+
+            // moves the turret aswell when castling
+            if(field[startrow][startcolumn][0] == 6
+               && abs((int)destcolumn - (int)startcolumn) == 2)
+            {
+                // activePlayer ? white : black
+                if(activePlayer)
+                {
+                    // moves the rook depending on the direction the king 
+                    // (horizontally)
+                    if(destcolumn > 4)
+                        Move(7, 7, 7, 5, field, &specialMoveSet);
+                    else
+                        Move(7, 0, 7, 3, field, &specialMoveSet);
+                }
+                else
+                {
+                    if(destcolumn > 4)
+                        Move(0, 7, 0, 5, field, &specialMoveSet);
+                    else
+                        Move(0, 0, 0, 3, field, &specialMoveSet);
+                }
+                PlaySound(&window);                
+            }
 
             // Check if check or checkmate
             if (CheckChecked(field))
             {
-                checkMate = CheckCheckmate(activePlayer, field);
+                checkMate = CheckCheckmate(activePlayer, field, specialMoveSet);
                 if(checkMate)
                 {
                     if(checkMate == 1)

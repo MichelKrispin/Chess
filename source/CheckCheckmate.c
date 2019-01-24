@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 // Check whether any King is now in Checkmate
-int CheckCheckmate(char activePlayer, unsigned int field[][8][2])
+int CheckCheckmate(char activePlayer, unsigned int field[][8][2], SpecialMoveSet specialMoveSet)
 {
     activePlayer = activePlayer ? 0 : 1;
     for(unsigned int startrow = 0; startrow < 8; startrow++)
@@ -17,7 +17,7 @@ int CheckCheckmate(char activePlayer, unsigned int field[][8][2])
                 for(unsigned int destcolumn = 0; destcolumn < 8; destcolumn++)
                 {
                     if(CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field)
-                      && CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+                      && CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet))
                     {
                         return 0;
                     }
@@ -26,7 +26,6 @@ int CheckCheckmate(char activePlayer, unsigned int field[][8][2])
         }
     }
     // returns Checkmate (1) or Stalemate (-1)
-    printf("Checkmate, yo!");
     if(CheckChecked(field))
         return 1;
     else

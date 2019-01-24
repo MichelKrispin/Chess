@@ -2,6 +2,7 @@
 #include "CheckBlocked.h"
 #include "Move.h"
 #include "CheckChecked.h"
+#include "CheckCastling.h"
 
 void CopyField(unsigned int field[][8][2], unsigned int controlfield[][8][2])
 {
@@ -20,16 +21,25 @@ void CopyField(unsigned int field[][8][2], unsigned int controlfield[][8][2])
 int CheckLogic(char activePlayer, 
                unsigned int startrow, unsigned int startcolumn, 
                unsigned int destrow, unsigned int destcolumn, 
-               unsigned int field[][8][2])
+               unsigned int field[][8][2],
+               SpecialMoveSet specialMoveSet)
 {
     if (field[startrow][startcolumn][1] == (unsigned int)activePlayer)
     {
         if (!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             return 0;
-        // moves the piece and checks afterwards if your king is still in check (moves the piece back if so)
+        // for castling 
+        if(field[startrow][startcolumn][0] == 6
+           && abs((int)destcolumn - (int)startcolumn) == 2)
+        {
+            // checks if king in check beforehand (not viable then)
+            if (CheckChecked(field) || !CheckCastling(activePlayer, destcolumn, field, specialMoveSet))
+                return 0;
+        }       
+        // moves the piece and checks afterwards if your king is in check (moves the piece back if so)
         unsigned int controlfield[8][8][2];
         CopyField(field, controlfield);
-        Move(startrow, startcolumn, destrow, destcolumn, controlfield);
+        Move(startrow, startcolumn, destrow, destcolumn, controlfield, NULL);
         // white players turn
         if ((activePlayer && CheckChecked(controlfield) == 1)
             // black players turn
@@ -40,4 +50,3 @@ int CheckLogic(char activePlayer,
     }
     return 1;
 }
-

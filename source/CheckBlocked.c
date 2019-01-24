@@ -101,8 +101,25 @@ int CheckBlocked(char activePlayer,
                     return 0;
             }
             break;
-        // King not needed aswell
-        // Knight and King ("no piece" excluded, because checked in CheckMove)
+        // King (for castling)
+        case 6:
+            if(abs((int)destcolumn - (int)startcolumn) == 2)
+            {
+                // direction of castling (horizontally)
+                if(destcolumn > startcolumn)
+                {
+                    // checks the area between king and rook
+                    if(!Rook(startrow, 7, destrow, 5, field))
+                        return 0;
+                }
+                else
+                {
+                    if(!Rook(startrow, 0, destrow, 3, field))
+                        return 0;
+                }
+            }
+            break;
+        // Knight ("no piece" excluded, because checked in CheckMove)
         default:
             break;
     }

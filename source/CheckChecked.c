@@ -3,7 +3,9 @@
 #include "CheckBlocked.h"
 
 // finds one king and returns the position as row and column
-int FindKing(unsigned int *kingrow, unsigned int *kingcolumn, unsigned int field[][8][2])
+int FindKing(unsigned int *kingrow,
+             unsigned int *kingcolumn,
+             unsigned int field[][8][2])
 {
     // loop for every fieldposition
     for(; *kingrow < 8; (*kingrow)++)
