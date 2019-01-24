@@ -222,7 +222,6 @@ int main(int argsc, char* argv[])
 
     }
 
-    // TODO: Cleanup all figures surfaces closeaudiodevice and freewav
     CleanupSDL(&window, figures.figures, figures.count);
     free(figures.figures);
     return 0;
