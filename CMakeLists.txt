@@ -12,6 +12,7 @@ endif()
 
 set(SOURCE ./source/Main.c
            ./source/CheckBlocked.c
+           ./source/CheckCastling.c
            ./source/CheckChecked.c
            ./source/CheckCheckmate.c
            ./source/CheckLogic.c

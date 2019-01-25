@@ -35,8 +35,7 @@ int CheckMove(char activePlayer,
                 else if(field[destrow][destcolumn][0] 
                         && field[destrow][destcolumn][1] != (unsigned int)activePlayer)
                 {
-                    if((destcolumn - startcolumn == 1)
-                       || (startcolumn - destcolumn == 1))
+                    if(abs((int)destcolumn - (int)startcolumn) == 1)
                     {
                         // move direction
                         if(activePlayer
