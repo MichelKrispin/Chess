@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "StructDefinitions.h"
@@ -29,13 +30,13 @@ int main(int argsc, char* argv[])
     memset(field, 0, sizeof(field)); 
 
     // Bools for moved at least once (enPassente and castling)
-    SpecialMoveSet specialMoveSet;
+    SpecialMoveSet specialMoveSet = {};
 
     // Initialize field array with data    
     InitializeField(field, &specialMoveSet);
 
     // Initialize SDL
-    Window window;
+    Window window = {};
     InitializeSDL(&window);
       
     Figures figures;
