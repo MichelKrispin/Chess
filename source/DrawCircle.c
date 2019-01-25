@@ -5,11 +5,14 @@
 // message value is used for loading specified image
 void DrawCircle(Window* sdlWindow)
 {
-    SDL_Surface* surfaceCircle = SDL_LoadBMP("media/PositionCircle.bmp"); 
+    if (sdlWindow->circle.texture == NULL)
+    {
+        SDL_Surface* surfaceCircle = SDL_LoadBMP("media/PositionCircle.bmp"); 
 
-    SDL_Texture* circle = SDL_CreateTextureFromSurface(sdlWindow->renderer, surfaceCircle);
+        sdlWindow->circle.texture = SDL_CreateTextureFromSurface(sdlWindow->renderer, surfaceCircle);
 
-    SDL_FreeSurface(surfaceCircle);
+        SDL_FreeSurface(surfaceCircle);
+    }
 
     SDL_Rect Rect;
     TransformRowColumnsToPixel(
@@ -26,7 +29,7 @@ void DrawCircle(Window* sdlWindow)
     Rect.h = 70;
 
 
-    SDL_RenderCopy(sdlWindow->renderer, circle, NULL, &Rect); 
+    SDL_RenderCopy(sdlWindow->renderer, sdlWindow->circle.texture, NULL, &Rect); 
 }
 
 

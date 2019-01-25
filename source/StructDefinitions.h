@@ -5,10 +5,18 @@
 
 typedef struct PositionCircle
 {
+    SDL_Texture* texture;
     unsigned int row;
     unsigned int column;
     char isSet;
 } PositionCircle;
+
+typedef struct MessageImages
+{
+    SDL_Texture* xSymbol;
+    SDL_Texture* bCheck;
+    SDL_Texture* wCheck;
+} MessageImages;
 
 typedef struct Window
 {
@@ -21,6 +29,7 @@ typedef struct Window
 
     // Used to show specific symbol
     char message;
+    MessageImages messageImages;
 
     // Used to show circle below clicked figure
     PositionCircle circle;
@@ -43,6 +52,12 @@ typedef struct Figure
     char type[2];
     char isSet;
 } Figure;
+
+typedef struct Figures
+{
+    Figure* figures;
+    int count;
+} Figures;
 
 typedef struct MousePosition
 {

@@ -1,5 +1,6 @@
 #include "Figures.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Figure CreateFigureAt(char type[2], const char* imagePath, SDL_Renderer* renderer)
 {
@@ -31,8 +32,9 @@ void RenderFigures(int count, Figure* figures, SDL_Renderer* renderer)
 }
 
 // Initializes all figures
-void InitializeFigures(Figure* figures, Window* sdlWindow)
+Figure* InitializeFigures(Window* sdlWindow)
 {
+    Figure* figures = (Figure*)malloc(sizeof(Figure) * 32);
     // Initialize figures
     // Initialize white pawns
     for (int i = 0; i < 8; i++)
@@ -73,6 +75,70 @@ void InitializeFigures(Figure* figures, Window* sdlWindow)
     // Initialize black queen and king
     figures[30] = CreateFigureAt("bq", "media/B_Queen.bmp", sdlWindow->renderer);
     figures[31] = CreateFigureAt("bk", "media/B_King.bmp", sdlWindow->renderer);
+
+    return figures;
+}
+
+Figure* AddFigure(Figures* figures, char* figureType, Window* sdlWindow)
+{
+    // Increment count one and realloc new space
+    figures->count += 1;
+    Figure* newfigure = (Figure*) realloc(figures->figures, sizeof(Figure) * figures->count);
+     
+    // Now switch the figureType so a new figure can be created
+    if (figureType[0] == 'w')
+    {
+        switch (figureType[1])
+        {
+            // Queen
+            case 'q':
+                newfigure[figures->count-1] = CreateFigureAt("wq", "media/W_Queen.bmp", sdlWindow->renderer);
+                break;
+
+            // Rook
+            case 'r':
+                newfigure[figures->count-1] = CreateFigureAt("wr", "media/W_Rook.bmp", sdlWindow->renderer);
+                break;
+                
+            // Bishop
+            case 'b':
+                newfigure[figures->count-1] = CreateFigureAt("wb", "media/W_Bishop.bmp", sdlWindow->renderer);
+                break;
+
+            // Knight
+            case 'n':
+                newfigure[figures->count-1] = CreateFigureAt("wn", "media/W_Knight.bmp", sdlWindow->renderer);
+                break;
+            default:
+                break;
+        }
+    }
+    else if (figureType[1] == 'b')
+    {
+        switch (figureType[1])
+        {
+            // Queen
+            case 'q':
+                newfigure[figures->count-1] = CreateFigureAt("bq", "media/B_Queen.bmp", sdlWindow->renderer);
+                break;
+            // Rook
+            case 'r':
+                newfigure[figures->count-1] = CreateFigureAt("br", "media/B_Rook.bmp", sdlWindow->renderer);
+                break;
+            // Bishop
+            case 'b':
+                newfigure[figures->count-1] = CreateFigureAt("bb", "media/B_Bishop.bmp", sdlWindow->renderer);
+                break;
+            // Knight
+            case 'n':
+                newfigure[figures->count-1] = CreateFigureAt("bn", "media/B_Knight.bmp", sdlWindow->renderer);
+                break;
+            default:
+                break;
+        }
+    }
+
+    return newfigure;
 }
 
 void ClearFigureMemory(int count, Figure* figures)

@@ -29,4 +29,10 @@ char isMovable = 0;
 // Bool for checkmate
 char checkMate = 0;
 
+// Bool for Castling
+char castling = 0;
+
+// Bool for checking if click was inside field
+char validClick = 1;
+
 #endif

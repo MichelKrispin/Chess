@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -40,16 +37,17 @@ int main(int argsc, char* argv[])
     // Initialize SDL
     Window window;
     InitializeSDL(&window);
-
-    Figure figures[32];
-    InitializeFigures(figures, &window);
+      
+    Figures figures;
+    figures.count = 32;
+    figures.figures = InitializeFigures(&window);
     
-    Draw(field, &window, figures, &mouse, &activePlayer, &specialMoveSet);
+    Draw(field, &window, &figures, &mouse, &activePlayer, &specialMoveSet);
 
     while (isPlaying)
     {
         // Check if the move is valid
-        if (clickIndex == 0 && oneTimeChecking == 0)
+        if (clickIndex == 0 && oneTimeChecking == 0 && validClick == 1)
         {
             oneTimeChecking = 1;
             isMovable = 1;
@@ -87,9 +85,18 @@ int main(int argsc, char* argv[])
                         &startcolumn,
                         mouse.newMouseY,
                         &startrow);
-                window.circle.isSet = 1;
-                window.circle.row = startrow;
-                window.circle.column = startcolumn;
+                // Check if click was inside field
+                if (startcolumn == 8 || startrow == 8)
+                    validClick = 0;
+                else
+                    validClick = 1;
+
+                if (validClick)
+                {
+                    window.circle.isSet = 1;
+                    window.circle.row = startrow;
+                    window.circle.column = startcolumn;
+                }
             }
 
             else if (clickIndex == 1)
@@ -99,7 +106,14 @@ int main(int argsc, char* argv[])
                         &destcolumn,
                         mouse.newMouseY,
                         &destrow);
-                window.circle.isSet = 0;
+                // If click wasn't inside field click again
+                if (destcolumn == 8 || destrow == 8)
+                    validClick = 0;
+                else
+                    validClick = 1;
+
+                if (validClick)
+                    window.circle.isSet = 0;
             }
 
             if (startcolumn == destcolumn 
@@ -111,7 +125,7 @@ int main(int argsc, char* argv[])
 
             if (clickIndex == -1)
                 clickIndex = 1;
-            else
+            else if (validClick)
                 clickIndex = clickIndex ? 0 : 1;
         }
         
@@ -185,7 +199,7 @@ int main(int argsc, char* argv[])
         // Draw the field
         isPlaying = Draw(field,
                          &window,
-                         figures,
+                         &figures,
                          &mouse,
                          &activePlayer,
                          &specialMoveSet);
@@ -193,7 +207,13 @@ int main(int argsc, char* argv[])
         // If checkMate is true show message box
         if (checkMate)
         {
-            int button = ShowMessageBox();
+            char message[100];
+            // If active player is black -> Because it already swapped
+            if (activePlayer == 0)
+                strcpy(message, "White won! Play again?");
+            else
+                strcpy(message, "Black won! Play again?");
+            int button = ShowMessageBox("Checkmate!", message);
             if (button == 0)
             {
                InitializeField(field, &specialMoveSet); 
@@ -210,7 +230,7 @@ int main(int argsc, char* argv[])
 
     }
 
-    // TODO: Cleanup all figures surfaces closeaudiodevice and freewav
-    CleanupSDL(&window, figures, 32);
+    CleanupSDL(&window, figures.figures, figures.count);
+    free(figures.figures);
     return 0;
 }
