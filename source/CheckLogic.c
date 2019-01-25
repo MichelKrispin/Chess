@@ -39,7 +39,7 @@ int CheckLogic(char activePlayer,
         // moves the piece and checks afterwards if your king is in check (moves the piece back if so)
         unsigned int controlfield[8][8][2];
         CopyField(field, controlfield);
-        Move(startrow, startcolumn, destrow, destcolumn, controlfield, NULL);
+        Move(startrow, startcolumn, destrow, destcolumn, controlfield, &specialMoveSet);
         // white players turn
         if ((activePlayer && CheckChecked(controlfield) == 1)
             // black players turn
