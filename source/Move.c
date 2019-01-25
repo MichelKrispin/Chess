@@ -28,6 +28,17 @@ void Move(unsigned int startrow, unsigned int startcolumn,
         // white King
         else if(startrow == 7 && startcolumn == 4)
             specialMoveSet->whiteKing = 1;
+        if(field[startrow][startcolumn][0] == 1
+           && abs((int)destrow - (int)startrow) == 2
+           && (field[destrow][destcolumn + 1][0] == 1 || field[destrow][destcolumn - 1][0] == 1))
+        {
+            specialMoveSet->enPassente = 1;
+        }
+        else
+        {
+            specialMoveSet->enPassente = 0;
+        }
+        
     }
 }
 
