@@ -22,6 +22,7 @@ set(SOURCE ./source/Main.c
            ./source/DrawTextfield.c
            ./source/Figures.c
            ./source/Initialize.c
+           ./source/InitializeDebug.c
            ./source/InitializeSDL.c
            ./source/Move.c
            ./source/PlaySound.c

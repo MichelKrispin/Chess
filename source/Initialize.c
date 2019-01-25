@@ -18,9 +18,6 @@ void InitializeField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
     {
         for(unsigned int columnc = 0; columnc < 8; columnc++)
         {
-            // Reset everything to 0
-            field[rowcount][columnc][0] = 0;
-
             // Pawns
             if((rowcount == 1) || (rowcount == 6))
                 field[rowcount][columnc][0] = 1;
@@ -35,6 +32,12 @@ void InitializeField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
                 else
                     field[rowcount][columnc][0] = 9 - columnc;
             }
+            // Reset everything to 0
+            else
+            {
+                field[rowcount][columnc][0] = 0;
+            }
+
             if(rowcount > 5)
                 field[rowcount][columnc][1] = 1;                // weiße Farbe
             else

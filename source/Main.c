@@ -4,6 +4,7 @@
 
 #include "StructDefinitions.h"
 #include "Initialize.h"
+#include "InitializeDebug.h"
 #include "PlaySound.h"
 #include "Figures.h"
 #include "InitializeSDL.h"
@@ -32,8 +33,11 @@ int main(int argsc, char* argv[])
     // Bools for moved at least once (enPassente and castling)
     SpecialMoveSet specialMoveSet = {};
 
-    // Initialize field array with data    
-    InitializeField(field, &specialMoveSet);
+    // Initialize field array with data   
+    // InitializeField(field, &specialMoveSet);
+
+    // Initialize another (debug) field for testpurposes
+    InitializeDebugField(field, &specialMoveSet);
 
     // Initialize SDL
     Window window = {};
@@ -59,7 +63,7 @@ int main(int argsc, char* argv[])
                 isMovable = 0;
             }
             // Check if logic is valid on this move
-            if (!CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet) && window.message != 1)
+            if (!window.message && !CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet) && window.message != 1)
             {
                 //printf("Invalid move\n");
                 window.message = 1;
@@ -135,10 +139,6 @@ int main(int argsc, char* argv[])
         // because two clicks are covered now
         if (clickIndex == 0 && isMovable == 1)
         {
-            Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
-            // If any figure is moved play the sound
-            PlaySound(&window);
-
             // moves the turret aswell when castling
             if(field[startrow][startcolumn][0] == 6
                && abs((int)destcolumn - (int)startcolumn) == 2)
@@ -162,6 +162,18 @@ int main(int argsc, char* argv[])
                 }
                 PlaySound(&window);                
             }
+            else if(specialMoveSet.enPassente == 2)
+            {
+                Move(startrow, startcolumn, startrow, destcolumn, field, &specialMoveSet);
+                Move(startrow, destcolumn, destrow, destcolumn, field, &specialMoveSet);
+            }
+            else
+            {
+                Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
+            }
+
+            // If any figure is moved play the sound
+            PlaySound(&window);
 
             // Check if check or checkmate
             if (CheckChecked(field))
