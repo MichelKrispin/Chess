@@ -196,7 +196,7 @@ int main(int argsc, char* argv[])
                         figureType[1] = 'n';
                     break;
                 }
-                if (field[destrow][destcolumn][0] == 1)
+                if (field[destrow][destcolumn][1] == 1)
                     figureType[0] = 'w';
                 else
                     figureType[0] = 'b';

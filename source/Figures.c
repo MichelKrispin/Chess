@@ -113,7 +113,7 @@ Figure* AddFigure(Figures* figures, char* figureType, Window* sdlWindow)
                 break;
         }
     }
-    else if (figureType[1] == 'b')
+    else if (figureType[0] == 'b')
     {
         switch (figureType[1])
         {
