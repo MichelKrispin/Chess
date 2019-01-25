@@ -57,9 +57,9 @@ int ShowMessageBox(char* title, char* message)
 int ShowSwapMessageBox()
 {
     const SDL_MessageBoxButtonData buttons[] = {
-        { SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 0, "Queen" },
-        { SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 1, "Rook" },
-        { 0                                      , 2, "Bishop" },
+        { SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 5, "Queen" },
+        { SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 2, "Rook" },
+        { 0                                      , 4, "Bishop" },
         { 0                                      , 3, "Knight" }
     };
     const SDL_MessageBoxColorScheme colorScheme = {

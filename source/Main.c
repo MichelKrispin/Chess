@@ -34,10 +34,10 @@ int main(int argsc, char* argv[])
     SpecialMoveSet specialMoveSet = {};
 
     // Initialize field array with data   
-    // InitializeField(field, &specialMoveSet);
+    InitializeField(field, &specialMoveSet);
 
     // Initialize another (debug) field for testpurposes
-    InitializeDebugField(field, &specialMoveSet);
+    
 
     // Initialize SDL
     Window window = {};
@@ -174,6 +174,34 @@ int main(int argsc, char* argv[])
 
             // If any figure is moved play the sound
             PlaySound(&window);
+
+            // swaps pawn when reaching the endrow
+            if(field[destrow][destcolumn][0] == 1
+               && (destrow == 0 || destrow == 7))
+            {
+                field[destrow][destcolumn][0] = ShowSwapMessageBox();
+                char figureType[2] = {'0','0'};
+                switch (field[destrow][destcolumn][0])
+                {
+                    case 5:
+                        figureType[1] = 'q';
+                    break;
+                    case 2:
+                        figureType[1] = 'r';
+                    break;
+                    case 4:
+                        figureType[1] = 'b';
+                    break;
+                    case 3:
+                        figureType[1] = 'n';
+                    break;
+                }
+                if (field[destrow][destcolumn][0] == 1)
+                    figureType[0] = 'w';
+                else
+                    figureType[0] = 'b';
+                figures.figures = AddFigure(&figures, figureType, &window);
+            }
 
             // Check if check or checkmate
             if (CheckChecked(field))

@@ -4,5 +4,6 @@
 #include "StructDefinitions.h"
 
 void InitializeDebugField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet);
+void InitializeDebugField2(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet);
 
 #endif

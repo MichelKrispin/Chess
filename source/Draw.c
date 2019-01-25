@@ -3,6 +3,7 @@
 #include "DrawTextfield.h"
 #include "Initialize.h"
 #include "ShowMessageBox.h"
+#include "InitializeDebug.h"
 #include "SDL.h"
 #include <stdio.h>
 
@@ -168,16 +169,14 @@ int Draw(unsigned int field[8][8][2],
             // Press 1 to reset to debugfield
             if (event.key.keysym.sym == SDLK_1)
             {
-                // TODO: Insert initializeDebugfield here!
-                printf("Pressed 1! Wuuuuu\n");
+                InitializeDebugField(field, specialMoveSet);
                 *activePlayer = 1;
                 return 1;
             }
             // Press 2 to reset to debugfield
             if (event.key.keysym.sym == SDLK_2)
             {
-                // TODO: Insert initializeDebugfield here!
-                printf("Pressed 2! Wuuuuu\n");
+                InitializeDebugField2(field, specialMoveSet);
                 *activePlayer = 1;
                 return 1;
             }
