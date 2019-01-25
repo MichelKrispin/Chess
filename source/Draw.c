@@ -2,7 +2,9 @@
 #include "DrawCircle.h"
 #include "DrawTextfield.h"
 #include "Initialize.h"
+#include "ShowMessageBox.h"
 #include "SDL.h"
+#include <stdio.h>
 
 
 void TransformRowColumnsToPixel(unsigned int row, unsigned int column,
@@ -146,7 +148,47 @@ int Draw(unsigned int field[8][8][2],
                *activePlayer = 1;
                return 1;
             }
-            // TODO: g for give up
+            // Press g to give up
+            if (event.key.keysym.sym == SDLK_g)
+            {
+                int result = 0;
+                // If player is black (already swapped) white gave up
+                if (*activePlayer == 0)
+                    result = ShowMessageBox("White wins", "Black gives up. Play again?");
+                else
+                    result = ShowMessageBox("Black wins", "White gives up. Play again?");
+                // If player want to exit return 0
+                if (result == 1)
+                    return 0;
+
+                InitializeField(field, specialMoveSet); 
+                *activePlayer = 1;
+                return 1;
+            }
+            // Press 1 to reset to debugfield
+            if (event.key.keysym.sym == SDLK_1)
+            {
+                // TODO: Insert initializeDebugfield here!
+                printf("Pressed 1! Wuuuuu\n");
+                *activePlayer = 1;
+                return 1;
+            }
+            // Press 2 to reset to debugfield
+            if (event.key.keysym.sym == SDLK_2)
+            {
+                // TODO: Insert initializeDebugfield here!
+                printf("Pressed 2! Wuuuuu\n");
+                *activePlayer = 1;
+                return 1;
+            }
+            // Press 2 to reset to debugfield
+            if (event.key.keysym.sym == SDLK_3)
+            {
+                // TODO: Insert initializeDebugfield here!
+                printf("Pressed 3! Wuuuuu\n");
+                *activePlayer = 1;
+                return 1;
+            }
 
         break;
     }
