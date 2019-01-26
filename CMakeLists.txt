@@ -7,7 +7,10 @@ if (WIN32)
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.dll.a"
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.a")
 else()
-    find_package(SDL2 REQUIRED)
+    INCLUDE(FindPkgConfig)
+    PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+    set(SDL2_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/sdl/include/SDL2/")
+    # find_package(SDL2 REQUIRED)
 endif()
 
 set(SOURCE ./source/Main.c
@@ -31,8 +34,6 @@ set(SOURCE ./source/Main.c
 
 
 add_executable(Chess ${SOURCE})
-
-message(${SDL2_LIBRARIES})
 
 target_include_directories(Chess PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(Chess ${SDL2_LIBRARIES})
