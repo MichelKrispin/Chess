@@ -77,6 +77,7 @@ typedef struct SpecialMoveSet
     char blackKing;
     char whiteKing;
     char enPassente; // pawns
+    unsigned int enPassenteColumn;
 } SpecialMoveSet;
 
 #endif

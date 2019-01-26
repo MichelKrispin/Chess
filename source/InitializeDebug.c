@@ -1,5 +1,19 @@
 #include "InitializeDebug.h"
 
+void SetSpecialMoveSetZero(SpecialMoveSet *specialMoveSet)
+{
+    // moved bools set to 0 and changed to 1 when piece moved once
+    specialMoveSet->bLeftRook = 0; 
+    specialMoveSet->bRightRook = 0; 
+    specialMoveSet->wLeftRook = 0; 
+    specialMoveSet->wRightRook = 0;
+    specialMoveSet->blackKing = 0;
+    specialMoveSet->whiteKing = 0;
+    specialMoveSet->enPassente = 0;
+    specialMoveSet->enPassenteColumn = 9;
+}
+
+// castling
 void InitializeDebugField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
 {
     // Set all array elements to be either 0 as empty
@@ -51,32 +65,12 @@ void InitializeDebugField(unsigned int field[][8][2], SpecialMoveSet *specialMov
             field[3][5][1] = 1;
         }
     }
-
-    // moved bools set to 0 and changed to 1 when piece moved once
-    specialMoveSet->bLeftRook = 0; 
-    specialMoveSet->bRightRook = 0; 
-    specialMoveSet->wLeftRook = 0; 
-    specialMoveSet->wRightRook = 0;
-    specialMoveSet->blackKing = 0;
-    specialMoveSet->whiteKing = 0;
-    specialMoveSet->enPassente = 0; 
+    SetSpecialMoveSetZero(specialMoveSet);
 }
 
-
+// pawn reaches endrow
 void InitializeDebugField2(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
 {
-    // Set all array elements to be either 0 as empty
-    // Or numbers for different figure
-    // Pawn  = 1
-    // Tower = 2
-    // Knight = 3
-    // Bishop = 4
-    // Queen = 5
-    // King = 6
-    // Third element indicates team color
-    // -> 0 = Black
-    // -> 1 = White
-
     for(unsigned int rowcount = 0; rowcount < 8; rowcount++)
     {
         for(unsigned int columnc = 0; columnc < 8; columnc++)
@@ -108,19 +102,11 @@ void InitializeDebugField2(unsigned int field[][8][2], SpecialMoveSet *specialMo
             else
                 field[rowcount][columnc][1] = 0;                // schwarz Farbe
             
-            // Debug Castling
+            // Debug Pawn reaches Endrow
             field[0][7][0] = 2;
             field[1][6][0] = 1;
             field[1][6][1] = 1;
         }
     }
-
-    // moved bools set to 0 and changed to 1 when piece moved once
-    specialMoveSet->bLeftRook = 0; 
-    specialMoveSet->bRightRook = 0; 
-    specialMoveSet->wLeftRook = 0; 
-    specialMoveSet->wRightRook = 0;
-    specialMoveSet->blackKing = 0;
-    specialMoveSet->whiteKing = 0;
-    specialMoveSet->enPassente = 0; 
+    SetSpecialMoveSetZero(specialMoveSet);
 }

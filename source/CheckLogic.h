@@ -11,6 +11,6 @@ int CheckLogic(char activePlayer,
                unsigned int startrow, unsigned int startcolumn, 
                unsigned int destrow, unsigned int destcolumn, 
                unsigned int field[][8][2],
-               SpecialMoveSet specialMoveSet);
+               SpecialMoveSet *specialMoveSet);
 
 #endif

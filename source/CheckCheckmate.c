@@ -17,7 +17,7 @@ int CheckCheckmate(char activePlayer, unsigned int field[][8][2], SpecialMoveSet
                 for(unsigned int destcolumn = 0; destcolumn < 8; destcolumn++)
                 {
                     if(CheckMove(activePlayer, startrow, startcolumn, destrow, destcolumn, field)
-                      && CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet))
+                      && CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet))
                     {
                         return 0;
                     }

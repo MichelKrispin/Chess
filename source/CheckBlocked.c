@@ -74,6 +74,8 @@ int CheckBlocked(char activePlayer,
                         field[(destrow + startrow) / 2][destcolumn][0])
                     return 0;
             }
+            else if(field[destrow][destcolumn][0] && (unsigned int)activePlayer == field[destrow][destcolumn][1])
+                return 0;
             break;
         // Rook
         case 2:

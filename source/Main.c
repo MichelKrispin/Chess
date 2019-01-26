@@ -63,7 +63,7 @@ int main(int argsc, char* argv[])
                 isMovable = 0;
             }
             // Check if logic is valid on this move
-            if (!window.message && !CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, specialMoveSet) && window.message != 1)
+            if (!window.message && !CheckLogic(activePlayer, startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet) && window.message != 1)
             {
                 //printf("Invalid move\n");
                 window.message = 1;
@@ -160,15 +160,20 @@ int main(int argsc, char* argv[])
                     else
                         Move(0, 0, 0, 3, field, &specialMoveSet);
                 }
-                PlaySound(&window);                
+                PlaySound(&window);
+                Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
-            else if(specialMoveSet.enPassente == 2)
+            // valid enPassente move
+            else if(specialMoveSet.enPassente)
             {
                 Move(startrow, startcolumn, startrow, destcolumn, field, &specialMoveSet);
                 Move(startrow, destcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
+            // any other move
             else
             {
+                // resets enPassente beforehand so that it can be set to 1 (first part of enPassente)
+                // if the player moved the pawn 2 at once
                 Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
 

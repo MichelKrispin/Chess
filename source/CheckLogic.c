@@ -22,24 +22,38 @@ int CheckLogic(char activePlayer,
                unsigned int startrow, unsigned int startcolumn, 
                unsigned int destrow, unsigned int destcolumn, 
                unsigned int field[][8][2],
-               SpecialMoveSet specialMoveSet)
+               SpecialMoveSet *specialMoveSet)
 {
     if (field[startrow][startcolumn][1] == (unsigned int)activePlayer)
     {
-        if (!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
+        if(!CheckBlocked(activePlayer, startrow, startcolumn, destrow, destcolumn, field))
             return 0;
+        // taking a piece with a pawn
+        if(field[startrow][startcolumn][0] == 1 && destcolumn != startcolumn)
+        {
+            if(!field[destrow][destcolumn][0] 
+               && (specialMoveSet->enPassenteColumn != destcolumn
+                   || (activePlayer && startrow != 3)
+                   || (!activePlayer && startrow != 4)))
+            {
+                return 0;
+            }
+            else
+                specialMoveSet->enPassente = 1;            
+        }
         // for castling 
         if(field[startrow][startcolumn][0] == 6
            && abs((int)destcolumn - (int)startcolumn) == 2)
         {
             // checks if king in check beforehand (not viable then)
-            if (CheckChecked(field) || !CheckCastling(activePlayer, destcolumn, field, specialMoveSet))
+            if (CheckChecked(field) || !CheckCastling(activePlayer, destcolumn, field, *specialMoveSet))
                 return 0;
-        }       
+        }
         // moves the piece and checks afterwards if your king is in check (moves the piece back if so)
         unsigned int controlfield[8][8][2];
+        SpecialMoveSet dummySpecialMoveSet = *specialMoveSet;
         CopyField(field, controlfield);
-        Move(startrow, startcolumn, destrow, destcolumn, controlfield, &specialMoveSet);
+        Move(startrow, startcolumn, destrow, destcolumn, controlfield, &dummySpecialMoveSet);
         // white players turn
         if ((activePlayer && CheckChecked(controlfield) == 1)
             // black players turn

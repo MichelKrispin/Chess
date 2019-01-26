@@ -7,9 +7,6 @@ void Move(unsigned int startrow, unsigned int startcolumn,
 {
     if (field[startrow][startcolumn][0] != 0)
     {
-        field[destrow][destcolumn][0] = field[startrow][startcolumn][0];
-        field[destrow][destcolumn][1] = field[startrow][startcolumn][1];
-        field[startrow][startcolumn][0] = 0;
         // black left Rook
         if(startrow == 0 && startcolumn == 0)
             specialMoveSet->bLeftRook = 1;
@@ -28,17 +25,38 @@ void Move(unsigned int startrow, unsigned int startcolumn,
         // white King
         else if(startrow == 7 && startcolumn == 4)
             specialMoveSet->whiteKing = 1;
+        // sets the column to which a pawn can use enPassente to move to
         if(field[startrow][startcolumn][0] == 1
-           && abs((int)destrow - (int)startrow) == 2
-           && (field[destrow][destcolumn + 1][0] == 1 || field[destrow][destcolumn - 1][0] == 1))
+           && abs((int)destrow - (int)startrow) == 2)
         {
-            specialMoveSet->enPassente = 1;
+            // if clauses hinder unexpected behaviour (outside of field)
+            if(destcolumn > 0)
+            {
+                if(destcolumn < 7)
+                {
+                    if(field[destrow][destcolumn + 1][0] == 1 || field[destrow][destcolumn - 1][0] == 1)
+                        specialMoveSet->enPassenteColumn = startcolumn;
+                }
+                else
+                {
+                    if(field[destrow][destcolumn - 1][0] == 1)
+                        specialMoveSet->enPassenteColumn = startcolumn;
+                }
+            }
+            else
+            {
+                if(field[destrow][destcolumn + 1][0] == 1)
+                    specialMoveSet->enPassenteColumn = startcolumn;
+            }
         }
         else
         {
-            specialMoveSet->enPassente = 0;
-        }
-        
+            specialMoveSet->enPassenteColumn = 9;
+        }        
+        field[destrow][destcolumn][0] = field[startrow][startcolumn][0];
+        field[destrow][destcolumn][1] = field[startrow][startcolumn][1];
+        field[startrow][startcolumn][0] = 0;
+        specialMoveSet->enPassente = 0;
     }
 }
 

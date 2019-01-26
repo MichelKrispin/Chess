@@ -180,11 +180,10 @@ int Draw(unsigned int field[8][8][2],
                 *activePlayer = 1;
                 return 1;
             }
-            // Press 2 to reset to debugfield
+            // Press 3 to reset to debugfield
             if (event.key.keysym.sym == SDLK_3)
             {
-                // TODO: Insert initializeDebugfield here!
-                printf("Pressed 3! Wuuuuu\n");
+                printf("wololo\n");
                 *activePlayer = 1;
                 return 1;
             }

@@ -53,4 +53,5 @@ void InitializeField(unsigned int field[][8][2], SpecialMoveSet *specialMoveSet)
     specialMoveSet->blackKing = 0;
     specialMoveSet->whiteKing = 0;
     specialMoveSet->enPassente = 0; 
+    specialMoveSet->enPassenteColumn = 9;
 }
