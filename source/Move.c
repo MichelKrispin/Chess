@@ -7,18 +7,22 @@ void Move(unsigned int startrow, unsigned int startcolumn,
 {
     if (field[startrow][startcolumn][0] != 0)
     {
-        // sets already moved pieces to 1 (for castling)
+        // sets already moved or taken pieces to 1 (for castling)
         // black left Rook
-        if(startrow == 0 && startcolumn == 0)
+        if((startrow == 0 && startcolumn == 0)
+           || (destrow == 0 && destcolumn == 0))
             specialMoveSet->bLeftRook = 1;
         // black right
-        else if(startrow == 0 && startcolumn == 7)
+        else if((startrow == 0 && startcolumn == 7)
+                || (destrow == 0 && destcolumn == 7))
             specialMoveSet->bRightRook = 1;
         // white left
-        else if(startrow == 7 && startcolumn == 0)
+        else if((startrow == 7 && startcolumn == 0)
+                || (destrow == 7 && destcolumn == 0))
             specialMoveSet->wLeftRook = 1;
         // white right
-        else if(startrow == 7 && startcolumn == 7)
+        else if((startrow == 7 && startcolumn == 7)
+                || (destrow == 7 && destcolumn == 7))
             specialMoveSet->wRightRook = 1;
         // black King
         else if(startrow == 0 && startcolumn == 4)

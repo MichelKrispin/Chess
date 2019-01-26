@@ -9,14 +9,14 @@ int CheckCastling(char activePlayer,
     {
         if(destcolumn > 4 && !specialMoveSet.wRightRook)
             return 1;
-        else if(!specialMoveSet.wLeftRook)
+        else if(destcolumn < 4 && !specialMoveSet.wLeftRook)
             return 1;
     }
     else if(!specialMoveSet.blackKing)
     {
         if(destcolumn > 4 && !specialMoveSet.bRightRook)
             return 1;
-        else if(!specialMoveSet.bLeftRook)
+        else if(destcolumn < 4 && !specialMoveSet.bLeftRook)
             return 1;
     }
     return 0;    
