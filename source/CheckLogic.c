@@ -31,6 +31,7 @@ int CheckLogic(char activePlayer,
         // taking a piece with a pawn
         if(field[startrow][startcolumn][0] == 1 && destcolumn != startcolumn)
         {
+            // enPassente, meaning moving to empty field, but reversed logic to return 0
             if(!field[destrow][destcolumn][0] 
                && (specialMoveSet->enPassenteColumn != destcolumn
                    || (activePlayer && startrow != 3)
@@ -38,6 +39,7 @@ int CheckLogic(char activePlayer,
             {
                 return 0;
             }
+            // if the move was viable, used in main.c
             else
                 specialMoveSet->enPassente = 1;            
         }

@@ -143,20 +143,23 @@ int main(int argsc, char* argv[])
             if(field[startrow][startcolumn][0] == 6
                && abs((int)destcolumn - (int)startcolumn) == 2)
             {
-                // activePlayer ? white : black
+                // white
                 if(activePlayer)
                 {
-                    // moves the rook depending on the direction the king 
-                    // (horizontally)
+                    // right
                     if(destcolumn > 4)
                         Move(7, 7, 7, 5, field, &specialMoveSet);
+                    // left
                     else
                         Move(7, 0, 7, 3, field, &specialMoveSet);
                 }
+                // black
                 else
                 {
+                    // right
                     if(destcolumn > 4)
                         Move(0, 7, 0, 5, field, &specialMoveSet);
+                    // left
                     else
                         Move(0, 0, 0, 3, field, &specialMoveSet);
                 }
@@ -166,14 +169,13 @@ int main(int argsc, char* argv[])
             // valid enPassente move
             else if(specialMoveSet.enPassente)
             {
+                // first takes pawn to side, second moves to empty field behind
                 Move(startrow, startcolumn, startrow, destcolumn, field, &specialMoveSet);
                 Move(startrow, destcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
             // any other move
             else
             {
-                // resets enPassente beforehand so that it can be set to 1 (first part of enPassente)
-                // if the player moved the pawn 2 at once
                 Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
 

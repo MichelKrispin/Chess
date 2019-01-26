@@ -7,6 +7,7 @@ void Move(unsigned int startrow, unsigned int startcolumn,
 {
     if (field[startrow][startcolumn][0] != 0)
     {
+        // sets already moved pieces to 1 (for castling)
         // black left Rook
         if(startrow == 0 && startcolumn == 0)
             specialMoveSet->bLeftRook = 1;
@@ -49,10 +50,12 @@ void Move(unsigned int startrow, unsigned int startcolumn,
                     specialMoveSet->enPassenteColumn = startcolumn;
             }
         }
+        // if the pawn didnt set enPassente up changes enPassenteColumn to outside of field
         else
         {
             specialMoveSet->enPassenteColumn = 9;
         }        
+        // actual movement part
         field[destrow][destcolumn][0] = field[startrow][startcolumn][0];
         field[destrow][destcolumn][1] = field[startrow][startcolumn][1];
         field[startrow][startcolumn][0] = 0;
