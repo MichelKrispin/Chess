@@ -32,16 +32,20 @@ int CheckLogic(char activePlayer,
         if(field[startrow][startcolumn][0] == 1 && destcolumn != startcolumn)
         {
             // enPassente, meaning moving to empty field, but reversed logic to return 0
-            if(!field[destrow][destcolumn][0] 
-               && (specialMoveSet->enPassenteColumn != destcolumn
-                   || (activePlayer && startrow != 3)
-                   || (!activePlayer && startrow != 4)))
+            if(!field[destrow][destcolumn][0]) 
             {
-                return 0;
+                if(specialMoveSet->enPassenteColumn != destcolumn
+                   || (activePlayer && startrow != 3)
+                   || (!activePlayer && startrow != 4))
+                {
+                    return 0;
+                }
+                else
+                {
+                    // if the move was viable, used in main.c
+                    specialMoveSet->enPassente = 1;            
+                }
             }
-            // if the move was viable, used in main.c
-            else
-                specialMoveSet->enPassente = 1;            
         }
         // for castling 
         if(field[startrow][startcolumn][0] == 6
