@@ -6,11 +6,12 @@ if (WIN32)
     set(SDL2_LIBRARIES "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2main.a"
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.dll.a"
                        "${PROJECT_SOURCE_DIR}/sdl/lib/libSDL2.a")
+elseif (APPLE)
+    find_package(SDL2 REQUIRED)
 else()
     INCLUDE(FindPkgConfig)
     PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
     set(SDL2_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/sdl/include/SDL2/")
-    # find_package(SDL2 REQUIRED)
 endif()
 
 set(SOURCE ./source/Main.c
