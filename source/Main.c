@@ -36,9 +36,6 @@ int main(int argsc, char* argv[])
     // Initialize field array with data   
     InitializeField(field, &specialMoveSet);
 
-    // Initialize another (debug) field for testpurposes
-    
-
     // Initialize SDL
     Window window = {};
     InitializeSDL(&window);
