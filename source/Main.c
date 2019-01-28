@@ -176,9 +176,6 @@ int main(int argsc, char* argv[])
                 Move(startrow, startcolumn, destrow, destcolumn, field, &specialMoveSet);
             }
 
-            // If any figure is moved play the sound
-            PlaySound(&window);
-
             // swaps pawn when reaching the endrow
             if(field[destrow][destcolumn][0] == 1
                && (destrow == 0 || destrow == 7))
@@ -206,6 +203,9 @@ int main(int argsc, char* argv[])
                     figureType[0] = 'b';
                 figures.figures = AddFigure(&figures, figureType, &window);
             }
+            
+            // If any figure is moved play the sound
+            PlaySound(&window);
 
             // Check if check or checkmate
             if (CheckChecked(field))

@@ -61,6 +61,7 @@ void InitializeDebugField(unsigned int field[][8][2], SpecialMoveSet *specialMov
             
             // Debug Castling
             field[0][7][0] = 2;
+            field[7][2][0] = 0;
             field[3][5][0] = 4;
             field[3][5][1] = 1;
         }
@@ -104,6 +105,7 @@ void InitializeDebugField2(unsigned int field[][8][2], SpecialMoveSet *specialMo
             
             // Debug Pawn reaches Endrow
             field[0][7][0] = 2;
+            field[6][7][0] = 0;
             field[1][6][0] = 1;
             field[1][6][1] = 1;
         }
