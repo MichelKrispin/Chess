@@ -1,5 +1,7 @@
 # Chess
 
+Chess written in C as a student project. There are currently no images provided.
+
 ## Run chess
 Go into the top directory and run:
 <hr />
