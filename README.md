@@ -1,6 +1,6 @@
 # Chess
 
-Chess written in C as a student project. There are currently no images provided.
+Chess written in C as a student project.
 
 ## Run chess
 Go into the top directory and run:
@@ -23,7 +23,7 @@ sh buildrun.sh
 
 On Linux:
 ```
-./buildrun.sh
+sh buildrun.sh
 ```  
 <br>
 <br>
